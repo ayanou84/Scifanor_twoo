@@ -3,11 +3,11 @@
 
 const SUPABASE_URL = typeof process !== 'undefined' && process.env.SUPABASE_URL
     ? process.env.SUPABASE_URL
-    : 'YOUR_SUPABASE_URL_HERE';
+    : 'https://zmedveuacpslxumlmdui.supabase.co';
 
 const SUPABASE_ANON_KEY = typeof process !== 'undefined' && process.env.SUPABASE_ANON_KEY
     ? process.env.SUPABASE_ANON_KEY
-    : 'YOUR_SUPABASE_ANON_KEY_HERE';
+    : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZWR2ZXVhY3BzbHh1bWxtZHVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk4MzE3NTgsImV4cCI6MjA4NTQwNzc1OH0.tDaNdrwPza4ucANa68iu4sAIQwYVAc9WzTLogjII4ig';
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
