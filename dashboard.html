@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin | SciFanor</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <h1>🔐 Admin Login</h1>
+            <p>Dashboard SciFanor</p>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="admin@scifanor.local">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+
+                <div id="loginError" class="error-message" style="display: none;"></div>
+            </form>
+
+            <div class="login-footer">
+                <a href="index.html">← Kembali ke Homepage</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard (Hidden until logged in) -->
+    <div id="dashboard" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container-wide">
+                <div class="header-content">
+                    <h1>Dashboard Admin</h1>
+                    <div class="header-actions">
+                        <span id="userEmail" class="user-email"></span>
+                        <button onclick="logout()" class="btn btn-secondary">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="dashboard-nav">
+            <div class="container-wide">
+                <a href="index.html" class="nav-link">🏠 Homepage</a>
+                <a href="biology.html" class="nav-link">🌱 Lihat Biology Section</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="container-wide">
+                <!-- Add Plant Button -->
+                <div class="dashboard-actions">
+                    <button onclick="showAddPlantForm()" class="btn btn-primary">
+                        ➕ Tambah Tumbuhan Baru
+                    </button>
+                </div>
+
+                <!-- Add/Edit Form (Hidden by default) -->
+                <div id="plantFormContainer" class="form-container" style="display: none;">
+                    <div class="form-header">
+                        <h2 id="formTitle">Tambah Tumbuhan Baru</h2>
+                        <button onclick="hideForm()" class="btn-close">✕</button>
+                    </div>
+
+                    <form id="plantForm" class="plant-form">
+                        <input type="hidden" id="plantId">
+
+                        <div class="form-grid">
+                            <!-- Basic Info -->
+                            <div class="form-group">
+                                <label for="namaIndonesia">Nama Indonesia *</label>
+                                <input type="text" id="namaIndonesia" required placeholder="contoh: Pohon Mangga">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="namaLatin">Nama Latin *</label>
+                                <input type="text" id="namaLatin" required placeholder="contoh: Mangifera indica">
+                            </div>
+
+                            <!-- Taxonomy Fields -->
+                            <div class="form-group">
+                                <label for="kingdom">Kingdom</label>
+                                <input type="text" id="kingdom" value="Plantae" placeholder="Plantae">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="divisi">Divisi</label>
+                                <input type="text" id="divisi" placeholder="contoh: Magnoliophyta">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="class">Class</label>
+                                <input type="text" id="class" placeholder="contoh: Magnoliopsida">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ordo">Ordo</label>
+                                <input type="text" id="ordo" placeholder="contoh: Sapindales">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="famili">Famili</label>
+                                <input type="text" id="famili" placeholder="contoh: Anacardiaceae">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="genus">Genus</label>
+                                <input type="text" id="genus" placeholder="contoh: Mangifera">
+                            </div>
+
+                            <div class="form-group form-group-full">
+                                <label for="spesies">Spesies</label>
+                                <input type="text" id="spesies" placeholder="contoh: Mangifera indica">
+                            </div>
+                        </div>
+
+                        <!-- Additional Info -->
+                        <div class="form-group">
+                            <label for="habitat">Habitat</label>
+                            <textarea id="habitat" rows="3" placeholder="Deskripsi habitat tumbuhan..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ciriKhas">Ciri Khas</label>
+                            <textarea id="ciriKhas" rows="3" placeholder="Ciri-ciri morfologi tumbuhan..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="manfaat">Manfaat</label>
+                            <textarea id="manfaat" rows="3" placeholder="Manfaat dan kegunaan tumbuhan..."></textarea>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="form-group">
+                            <label for="imageFile">Upload Gambar</label>
+                            <input type="file" id="imageFile" accept="image/*">
+                            <small>Format: JPG, PNG, WebP (Max 2MB)</small>
+                        </div>
+
+                        <div id="imagePreview" style="display: none;">
+                            <img id="previewImg" style="max-width: 200px; border-radius: 8px; margin-top: 10px;">
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <span id="submitBtnText">Simpan</span>
+                            </button>
+                            <button type="button" onclick="hideForm()" class="btn btn-secondary">Batal</button>
+                        </div>
+
+                        <div id="formError" class="error-message" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <!-- Plants List -->
+                <div class="plants-list-container">
+                    <h2>Daftar Tumbuhan</h2>
+
+                    <div id="plantsLoading" class="loading-container">
+                        <div class="spinner"></div>
+                        <p>Memuat data...</p>
+                    </div>
+
+                    <div id="plantsList" class="plants-table" style="display: none;">
+                        <!-- Plants will be inserted here -->
+                    </div>
+
+                    <div id="plantsEmpty" class="empty-state" style="display: none;">
+                        <p>Belum ada data tumbuhan</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

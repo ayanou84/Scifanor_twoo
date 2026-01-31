@@ -1,0 +1,310 @@
+/* Biology Section Specific Styles */
+
+/* Navigation */
+.nav {
+    background: var(--color-bg-secondary);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    transition: color var(--transition-fast);
+}
+
+.nav-brand:hover {
+    color: var(--color-primary);
+}
+
+.nav-link {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.nav-link:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--color-primary-light);
+}
+
+/* Bio Hero */
+.bio-hero {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bio-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%236366f1" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') no-repeat top center;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+.project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    color: var(--color-secondary);
+    animation: fadeIn 0.8s ease;
+}
+
+.bio-title {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    animation: fadeIn 1s ease;
+    line-height: 1.2;
+}
+
+.bio-description {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+    animation: fadeIn 1.2s ease;
+}
+
+.bio-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeIn 1.4s ease;
+}
+
+/* Plants Section */
+.plants-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-header p {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+}
+
+/* Plants Grid */
+.plants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+/* Plant Card */
+.plant-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.plant-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-science);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.plant-card:hover::before {
+    opacity: 0.05;
+}
+
+.plant-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+.plant-image-container {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.plant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.plant-card:hover .plant-image {
+    transform: scale(1.1);
+}
+
+.plant-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.plant-info {
+    padding: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.plant-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+.plant-latin {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-sm);
+}
+
+.plant-family {
+    display: inline-block;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--color-primary-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Loading State */
+.loading-container,
+.error-container,
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-2xl);
+}
+
+.loading-container p,
+.error-container p {
+    margin-top: var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+.empty-state {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.empty-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.empty-state p {
+    color: var(--color-text-muted);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--color-bg-secondary);
+    margin-top: var(--spacing-2xl);
+}
+
+.footer p {
+    color: var(--color-text-muted);
+}
+
+.footer-gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bio-title {
+        font-size: 2rem;
+    }
+
+    .bio-description {
+        font-size: 1rem;
+    }
+
+    .bio-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .plants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .plants-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-content {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}

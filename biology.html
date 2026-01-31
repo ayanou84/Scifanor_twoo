@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project Identifikasi Taksonomi Tumbuhan - Kelas 12 IPS 2">
+    <title>Project Biologi - Identifikasi Taksonomi Tumbuhan | SciFanor</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/biology.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">← SciFanor</a>
+                <a href="dashboard.html" class="nav-link">Dashboard Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bio-hero">
+        <div class="container text-center">
+            <div class="project-badge">
+                <span>🌿 Project Akhir Semester 2</span>
+            </div>
+            <h1 class="bio-title">
+                Identifikasi Taksonomi<br>
+                <span class="text-gradient">Tumbuhan di Taman Sekolah</span>
+            </h1>
+            <p class="bio-description">
+                Ini adalah project akhir semester 2 kami di kelas <strong>12 IPS 2</strong>,<br>
+                SMA Brigjend Katamso 2 Medan.
+            </p>
+            <p class="bio-subtitle">
+                Kami mengidentifikasi tingkatan taksonomi tumbuhan yang ada di sekitar sekolah,<br>
+                mulai dari Kingdom, Divisi, Class, Ordo, Famili, Genus, hingga Spesies.
+            </p>
+        </div>
+    </section>
+
+    <!-- Plants Grid Section -->
+    <section class="plants-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Koleksi Tumbuhan</h2>
+                <p>Klik pada kartu untuk melihat detail klasifikasi taksonomi</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-container">
+                <div class="spinner"></div>
+                <p>Memuat data tumbuhan...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="error-container" style="display: none;">
+                <p>❌ Gagal memuat data tumbuhan</p>
+                <button class="btn btn-primary" onclick="loadPlants()">Coba Lagi</button>
+            </div>
+
+            <!-- Plants Grid -->
+            <div id="plantsGrid" class="plants-grid">
+                <!-- Plants will be dynamically inserted here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-icon">🌱</div>
+                <h3>Belum ada data tumbuhan</h3>
+                <p>Silakan tambahkan data melalui Dashboard Admin</p>
+                <a href="dashboard.html" class="btn btn-primary mt-2">Ke Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            Dibuat dengan <span style="color: #10b981;">💚</span> oleh <span class="footer-gradient-text">12 IPS
+                2</span>
+        </p>
+        <p style="font-size: 0.9rem; margin-top: var(--spacing-xs);">
+            SMA Brigjend Katamso 2 Medan • 2026
+        </p>
+    </footer>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/biology.js"></script>
+</body>
+
+</html>
