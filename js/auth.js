@@ -1,5 +1,5 @@
 // Authentication Module
-const supabase = window.supabaseClient;
+// Using window.supabaseClient directly to avoid variable name collisions
 
 // Check if user is logged in on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Check authentication status
 async function checkAuth() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
 
     if (session) {
         // User is logged in
@@ -52,7 +52,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
         submitBtn.disabled = true;
 
         // Attempt login
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await window.supabaseClient.auth.signInWithPassword({
             email,
             password
         });
@@ -79,7 +79,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
 // Logout function
 async function logout() {
     try {
-        await supabase.auth.signOut();
+        await window.supabaseClient.auth.signOut();
         console.log('✅ Logged out');
         showLoginScreen();
 
@@ -94,7 +94,7 @@ async function logout() {
 
 // Get current user (helper function)
 async function getCurrentUser() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
     return session?.user || null;
 }
 

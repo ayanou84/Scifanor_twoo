@@ -1,5 +1,6 @@
 // Dashboard CRUD Logic
-const supabase = window.supabaseClient;
+// Dashboard CRUD Logic
+// Using window.supabaseClient directly
 
 // DOM Elements
 const plantsListEl = document.getElementById('plantsList');
@@ -29,7 +30,7 @@ async function fetchPlants() {
     try {
         plantsLoadingEl.style.display = 'block';
 
-        const { data: plants, error } = await supabase
+        const { data: plants, error } = await window.supabaseClient
             .from('plants')
             .select('*')
             .order('created_at', { ascending: false });
@@ -106,7 +107,7 @@ window.hideForm = function () {
 // Edit Plant
 window.editPlant = async function (id) {
     try {
-        const { data: plant, error } = await supabase
+        const { data: plant, error } = await window.supabaseClient
             .from('plants')
             .select('*')
             .eq('id', id)
@@ -172,13 +173,13 @@ plantForm.addEventListener('submit', async (e) => {
             const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
             const filePath = `${fileName}`;
 
-            const { error: uploadError } = await supabase.storage
+            const { error: uploadError } = await window.supabaseClient.storage
                 .from('plant-images')
                 .upload(filePath, imageFile);
 
             if (uploadError) throw uploadError;
 
-            const { data: { publicUrl } } = supabase.storage
+            const { data: { publicUrl } } = window.supabaseClient.storage
                 .from('plant-images')
                 .getPublicUrl(filePath);
 
@@ -209,13 +210,13 @@ plantForm.addEventListener('submit', async (e) => {
         let error;
 
         if (isEditing) {
-            const { error: updateError } = await supabase
+            const { error: updateError } = await window.supabaseClient
                 .from('plants')
                 .update(plantData)
                 .eq('id', editingId);
             error = updateError;
         } else {
-            const { error: insertError } = await supabase
+            const { error: insertError } = await window.supabaseClient
                 .from('plants')
                 .insert([plantData]);
             error = insertError;
@@ -243,7 +244,7 @@ window.deletePlant = async function (id) {
     if (!confirm('Apakah anda yakin ingin menghapus data tumbuhan ini?')) return;
 
     try {
-        const { error } = await supabase
+        const { error } = await window.supabaseClient
             .from('plants')
             .delete()
             .eq('id', id);
@@ -260,7 +261,7 @@ window.deletePlant = async function (id) {
 
 // Real-time Subscription (Optional but cool)
 function setupRealtimeSubscription() {
-    supabase
+    window.supabaseClient
         .channel('public:plants')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'plants' }, (payload) => {
             console.log('Change received!', payload);
