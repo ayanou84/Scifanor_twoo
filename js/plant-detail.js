@@ -1,5 +1,6 @@
 // Plant Detail Page - Load and Display Individual Plant
-const supabase = window.supabaseClient;
+// Plant Detail Page - Load and Display Individual Plant
+// Using window.supabaseClient directly
 
 // DOM Elements
 const loadingEl = document.getElementById('loading');
@@ -42,7 +43,7 @@ async function loadPlantDetail() {
         console.log(`Fetching plant with ID: ${plantId}`);
 
         // Fetch plant from Supabase
-        const { data: plant, error } = await supabase
+        const { data: plant, error } = await window.supabaseClient
             .from('plants')
             .select('*')
             .eq('id', plantId)

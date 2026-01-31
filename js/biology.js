@@ -1,5 +1,6 @@
 // Biology Page - Plants Loading and Display
-const supabase = window.supabaseClient;
+// Biology Page - Plants Loading and Display
+// Using window.supabaseClient directly
 
 // DOM Elements
 const loadingEl = document.getElementById('loading');
@@ -22,7 +23,7 @@ async function loadPlants() {
         console.log('Fetching plants from Supabase...');
 
         // Fetch plants from Supabase
-        const { data: plants, error } = await supabase
+        const { data: plants, error } = await window.supabaseClient
             .from('plants')
             .select('*')
             .order('nama_indonesia', { ascending: true });
