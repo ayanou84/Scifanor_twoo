@@ -16,6 +16,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/biology.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/plant-detail.css">
     <style>
         /* Navigation */
         .nav {
@@ -245,6 +248,21 @@
             </div>
         </section>
 
+        <!-- Plant Anatomy Section (Dynamic) -->
+        <section id="anatomySection" class="anatomy-section">
+            <div class="container">
+                <h2>🔬 Visualisasi Anatomi Tumbuhan</h2>
+                <div id="anatomyVisualization">
+                    <!-- Plant anatomy will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- YouTube Video Section (Dynamic) -->
+        <section id="youtubeSection" class="youtube-section">
+            <!-- YouTube embed will be rendered here by JavaScript -->
+        </section>
+
         <!-- Additional Info Section -->
         <section class="info-section">
             <div class="container">
@@ -291,6 +309,8 @@
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
+    <script src="js/utilities.js"></script>
+    <script src="js/plant-anatomy.js"></script>
     <script src="js/plant-detail.js"></script>
 </body>
 

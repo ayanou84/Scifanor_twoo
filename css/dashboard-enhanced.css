@@ -1,0 +1,368 @@
+/* ==========================================
+   Dashboard Enhancements - Mobile First
+   Multiple Images, Taxonomy Desc, YouTube
+   ========================================== */
+
+/* Form Sections */
+.form-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 2px solid var(--life-bg-tertiary);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--life-green-primary);
+    font-weight: 700;
+}
+
+.section-desc {
+    font-size: 0.9rem;
+    color: var(--life-text-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+.form-hint {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.85rem;
+    color: var(--life-text-muted);
+    font-style: italic;
+}
+
+/* ==========================================
+   Multiple Image Upload Grid - Mobile First
+   ========================================== */
+
+.image-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+@media (max-width: 480px) {
+    .image-upload-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+}
+
+.image-upload-item {
+    position: relative;
+}
+
+.image-upload-label {
+    display: block;
+    cursor: pointer;
+}
+
+.image-input-hidden {
+    display: none;
+}
+
+.image-upload-area {
+    border: 2px dashed var(--life-green-primary);
+    border-radius: var(--radius-md);
+    background: var(--life-bg-secondary);
+    padding: var(--spacing-lg) var(--spacing-sm);
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-upload-area:hover {
+    border-color: var(--life-green-dark);
+    background: var(--life-bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    display: block;
+}
+
+.upload-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--life-text-primary);
+}
+
+/* Image Preview State */
+.image-upload-area.has-image {
+    border-style: solid;
+    border-color: var(--life-green-primary);
+    background: white;
+    padding: 0;
+}
+
+.image-upload-area.has-image .upload-icon,
+.image-upload-area.has-image .upload-text {
+    display: none;
+}
+
+.image-upload-preview {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: calc(var(--radius-md) - 2px);
+}
+
+.image-remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(239, 68, 68, 0.95);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    opacity: 0;
+}
+
+.image-upload-area.has-image:hover .image-remove-btn {
+    opacity: 1;
+}
+
+.image-remove-btn:hover {
+    background: rgba(220, 38, 38, 1);
+    transform: scale(1.1);
+}
+
+/* ==========================================
+   Taxonomy Description Grid
+   ========================================== */
+
+.taxonomy-desc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .taxonomy-desc-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.taxonomy-desc-grid .form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+    font-size: 0.9rem;
+}
+
+.taxonomy-desc-grid label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--life-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ==========================================
+   Upload Progress & States
+   ========================================== */
+
+.upload-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--life-bg-tertiary);
+    overflow: hidden;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.upload-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--life-green-primary), var(--life-green-light));
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.uploading .image-upload-area {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.uploading .upload-icon {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ==========================================
+   Mobile Optimizations
+   ========================================== */
+
+@media (max-width: 768px) {
+    .form-section {
+        margin-bottom: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .section-desc {
+        font-size: 0.85rem;
+    }
+
+    .image-upload-area {
+        min-height: 120px;
+        padding: var(--spacing-md) var(--spacing-xs);
+    }
+
+    .upload-icon {
+        font-size: 2rem;
+    }
+
+    .upload-text {
+        font-size: 0.75rem;
+    }
+
+    .form-hint {
+        font-size: 0.75rem;
+    }
+}
+
+/* Touch-friendly for mobile */
+@media (hover: none) {
+    .image-upload-area {
+        min-height: 130px;
+    }
+
+    .image-remove-btn {
+        opacity: 1;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* ==========================================
+   Form Enhancements
+   ========================================== */
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+/* YouTube URL input with icon */
+#youtubeUrl {
+    padding-left: 40px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ef4444"><path d="M23.5 6.5c0-1.1-.9-2-2-2h-19c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h19c1.1 0 2-.9 2-2v-11zm-13 9.5V8l6 4-6 4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px;
+}
+
+/* Responsive improvements for existing form */
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+/* Success state for uploaded images */
+.image-upload-success {
+    animation: successPulse 0.5s ease;
+}
+
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Loading spinner for individual image uploads */
+.image-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--life-bg-tertiary);
+    border-top-color: var(--life-green-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Error state */
+.image-upload-error {
+    border-color: #ef4444 !important;
+    background: #fef2f2 !important;
+}
+
+.image-upload-error .upload-text::after {
+    content: ' ❌ Upload gagal';
+    display: block;
+    font-size: 0.75rem;
+    color: #dc2626;
+    margin-top: 4px;
+}

@@ -16,6 +16,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard-enhanced.css">
 </head>
 
 <body>
@@ -155,9 +157,141 @@
                             <textarea id="manfaat" rows="3" placeholder="Manfaat dan kegunaan tumbuhan..."></textarea>
                         </div>
 
-                        <!-- Image Upload -->
-                        <div class="form-group">
-                            <label for="imageFile">Upload Gambar</label>
+                        <!-- Multiple Images Upload (NEW) -->
+                        <div class="form-section">
+                            <h3 class="section-title">📸 Gambar Tumbuhan</h3>
+                            <p class="section-desc">Upload foto detail bagian tumbuhan (opsional)</p>
+
+                            <div class="image-upload-grid">
+                                <!-- Full Plant Image -->
+                                <div class="image-upload-item">
+                                    <label class="image-upload-label">
+                                        <input type="file" id="imageFullPlant" accept="image/*" data-part="full_plant"
+                                            class="image-input-hidden">
+                                        <div class="image-upload-area" id="preview-full_plant">
+                                            <span class="upload-icon">🌳</span>
+                                            <span class="upload-text">Tumbuhan Utuh</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Root Image -->
+                                <div class="image-upload-item">
+                                    <label class="image-upload-label">
+                                        <input type="file" id="imageRoot" accept="image/*" data-part="root"
+                                            class="image-input-hidden">
+                                        <div class="image-upload-area" id="preview-root">
+                                            <span class="upload-icon">🌱</span>
+                                            <span class="upload-text">Akar</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Stem Image -->
+                                <div class="image-upload-item">
+                                    <label class="image-upload-label">
+                                        <input type="file" id="imageStem" accept="image/*" data-part="stem"
+                                            class="image-input-hidden">
+                                        <div class="image-upload-area" id="preview-stem">
+                                            <span class="upload-icon">🎋</span>
+                                            <span class="upload-text">Batang</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Leaf Image -->
+                                <div class="image-upload-item">
+                                    <label class="image-upload-label">
+                                        <input type="file" id="imageLeaf" accept="image/*" data-part="leaf"
+                                            class="image-input-hidden">
+                                        <div class="image-upload-area" id="preview-leaf">
+                                            <span class="upload-icon">🍃</span>
+                                            <span class="upload-text">Daun</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Fruit Image -->
+                                <div class="image-upload-item">
+                                    <label class="image-upload-label">
+                                        <input type="file" id="imageFruit" accept="image/*" data-part="fruit"
+                                            class="image-input-hidden">
+                                        <div class="image-upload-area" id="preview-fruit">
+                                            <span class="upload-icon">🌸</span>
+                                            <span class="upload-text">Bunga/Buah</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <small class="form-hint">Klik atau tap untuk upload. Format: JPG, PNG, WebP (Max 2MB per
+                                gambar)</small>
+                        </div>
+
+                        <!-- Taxonomy Descriptions (NEW) -->
+                        <div class="form-section">
+                            <h3 class="section-title">📝 Deskripsi Taksonomi (Opsional)</h3>
+                            <p class="section-desc">Jelaskan mengapa tumbuhan termasuk dalam kategori tertentu</p>
+
+                            <div class="taxonomy-desc-grid">
+                                <div class="form-group">
+                                    <label for="descKingdom">🔹 Kingdom</label>
+                                    <textarea id="descKingdom" rows="2"
+                                        placeholder="Contoh: Plantae karena memiliki dinding sel dan klorofil"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descDivisi">🔹 Divisi</label>
+                                    <textarea id="descDivisi" rows="2"
+                                        placeholder="Jelaskan karakteristik divisi"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descClass">🔹 Class</label>
+                                    <textarea id="descClass" rows="2"
+                                        placeholder="Jelaskan karakteristik kelas"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descOrdo">🔹 Ordo</label>
+                                    <textarea id="descOrdo" rows="2"
+                                        placeholder="Jelaskan karakteristik ordo"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descFamili">🔹 Famili</label>
+                                    <textarea id="descFamili" rows="2"
+                                        placeholder="Contoh: Myrtaceae karena daun tunggal dengan kelenjar minyak"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descGenus">🔹 Genus</label>
+                                    <textarea id="descGenus" rows="2"
+                                        placeholder="Jelaskan karakteristik genus"></textarea>
+                                </div>
+
+                                <div class="form-group form-group-full">
+                                    <label for="descSpesies">🔹 Spesies</label>
+                                    <textarea id="descSpesies" rows="2"
+                                        placeholder="Jelaskan ciri khas spesies ini"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- YouTube URL (NEW) -->
+                        <div class="form-section">
+                            <h3 class="section-title">📺 Video Pembelajaran (Opsional)</h3>
+                            <div class="form-group">
+                                <label for="youtubeUrl">URL YouTube</label>
+                                <input type="url" id="youtubeUrl"
+                                    placeholder="https://www.youtube.com/watch?v=... atau https://youtu.be/...">
+                                <small class="form-hint">Paste URL video YouTube yang relevan dengan tumbuhan
+                                    ini</small>
+                            </div>
+                        </div>
+
+                        <!-- Old Single Image Upload (Keep for backward compatibility) -->
+                        <div class="form-group" style="display: none;">
+                            <label for="imageFile">Upload Gambar (Legacy)</label>
                             <input type="file" id="imageFile" accept="image/*">
                             <small>Format: JPG, PNG, WebP (Max 2MB)</small>
                         </div>
@@ -202,6 +336,7 @@
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
+    <script src="js/utilities.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/dashboard.js"></script>
 </body>

@@ -78,11 +78,6 @@ function createPlantCard(plant, index) {
     card.style.opacity = '0';
     card.style.animationDelay = `${index * 0.1}s`;
 
-    // Handle click to detail page
-    card.onclick = () => {
-        window.location.href = `plant-detail.html?id=${plant.id}`;
-    };
-
     // Image or placeholder
     const imageHTML = plant.image_url
         ? `<img src="${plant.image_url}" alt="${plant.nama_indonesia}" class="plant-image">`
@@ -91,6 +86,10 @@ function createPlantCard(plant, index) {
     card.innerHTML = `
     <div class="plant-image-container">
       ${imageHTML}
+      <button class="plant-card-share" onclick="event.stopPropagation(); sharePlant('${plant.id}', '${plant.nama_indonesia.replace(/'/g, "\\'")}')">
+        <span>🔗</span>
+        <span>Share</span>
+      </button>
     </div>
     <div class="plant-info">
       <h3 class="plant-name">${plant.nama_indonesia}</h3>
@@ -98,6 +97,11 @@ function createPlantCard(plant, index) {
       ${plant.famili ? `<span class="plant-family">${plant.famili}</span>` : ''}
     </div>
   `;
+
+    // Handle click to detail page (exclude share button)
+    card.addEventListener('click', () => {
+        window.location.href = `plant-detail.html?id=${plant.id}`;
+    });
 
     return card;
 }

@@ -1,0 +1,336 @@
+/* ==============================
+   Space Theme Stylesheet
+   For Homepage Space Aesthetic
+   ============================== */
+
+/* Space Theme Color Variables */
+:root {
+    --space-bg-start: #0f172a;
+    --space-bg-mid: #1e293b;
+    --space-bg-end: #3b82f6;
+    --space-accent-blue: #60a5fa;
+    --space-accent-cyan: #22d3ee;
+    --space-accent-purple: #a78bfa;
+    --star-color: #ffffff;
+    --meteor-color: #fbbf24;
+}
+
+/* Space Background Gradient */
+.space-background {
+    background: linear-gradient(180deg,
+            var(--space-bg-start) 0%,
+            var(--space-bg-mid) 50%,
+            #1e3a8a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Starfield */
+.starfield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: var(--star-color);
+    border-radius: 50%;
+    animation: twinkle var(--duration, 3s) ease-in-out infinite;
+    opacity: 0;
+}
+
+.star.small {
+    width: 1px;
+    height: 1px;
+}
+
+.star.medium {
+    width: 2px;
+    height: 2px;
+}
+
+.star.large {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 4px var(--star-color);
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Floating Particles */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: float var(--duration, 15s) linear infinite;
+}
+
+.particle.blue {
+    background: radial-gradient(circle, var(--space-accent-blue) 0%, transparent 70%);
+    width: 100px;
+    height: 100px;
+}
+
+.particle.cyan {
+    background: radial-gradient(circle, var(--space-accent-cyan) 0%, transparent 70%);
+    width: 80px;
+    height: 80px;
+}
+
+.particle.purple {
+    background: radial-gradient(circle, var(--space-accent-purple) 0%, transparent 70%);
+    width: 120px;
+    height: 120px;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(var(--tx, 100px), var(--ty, 100px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Meteor Effect (Optional - triggers on hover or load) */
+.meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--meteor-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px var(--meteor-color);
+    animation: meteor 3s linear;
+    pointer-events: none;
+}
+
+@keyframes meteor {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(300px, 300px);
+        opacity: 0;
+    }
+}
+
+/* Glassmorphism Effects */
+.glass-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.glass-card:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.3);
+}
+
+/* Orbital Animation for Decorative Elements */
+.orbital {
+    position: absolute;
+    animation: orbit var(--orbit-duration, 30s) linear infinite;
+    transform-origin: center;
+}
+
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(var(--orbit-radius, 200px)) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translateX(var(--orbit-radius, 200px)) rotate(-360deg);
+    }
+}
+
+/* Planet Decorations */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.planet.small {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, var(--space-accent-purple), #4c1d95);
+}
+
+.planet.medium {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 25% 25%, var(--space-accent-blue), #1e3a8a);
+}
+
+.planet.large {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle at 35% 35%, var(--space-accent-cyan), #0e7490);
+}
+
+/* Gradient Text Enhancement for Space Theme */
+.space-gradient-text {
+    background: linear-gradient(135deg,
+            var(--space-accent-cyan) 0%,
+            var(--space-accent-blue) 50%,
+            var(--space-accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease-in-out infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Pulsing Glow Effect */
+.pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(96, 165, 250, 0.6);
+    }
+}
+
+/* Floating Animation for Hero Content */
+.float-gentle {
+    animation: floatGentle 6s ease-in-out infinite;
+}
+
+@keyframes floatGentle {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Entrance Animations */
+.fade-in-up {
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scale-in {
+    animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Parallax Effect Helper */
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .particle {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .planet {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .orbital {
+        --orbit-radius: 100px;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .star,
+    .particle,
+    .meteor,
+    .orbital,
+    .float-gentle,
+    .pulse-glow {
+        animation: none;
+    }
+
+    .space-gradient-text {
+        animation: none;
+        background-position: 0% 50%;
+    }
+}

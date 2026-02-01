@@ -1,22 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SciFanor - Portal pembelajaran sains untuk siswa IPS kelas 12 IPS 2, SMA Brigjend Katamso 2 Medan">
+  <meta name="description"
+    content="SciFanor - Portal pembelajaran sains untuk siswa IPS kelas 12 IPS 2, SMA Brigjend Katamso 2 Medan">
   <meta name="keywords" content="sains, biologi, IPS, pembelajaran, taksonomi, tumbuhan">
   <title>SciFanor - Science for IPS Students</title>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+  <link rel="stylesheet" href="css/space-theme.css">
+  <link rel="stylesheet" href="css/components.css">
+
   <style>
-    /* Hero Section */
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float-gentle {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(96, 165, 250, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(96, 165, 250, 0);
+      }
+    }
+
+    /* Hero Section - Space Theme */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -26,84 +73,65 @@
       position: relative;
       overflow: hidden;
       padding: var(--spacing-2xl) var(--spacing-md);
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
     }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
-    }
-    
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
-    
+
     .hero-content {
       position: relative;
       z-index: 1;
       max-width: 900px;
     }
-    
+
     .hero-logo {
       font-size: 5rem;
       font-weight: 800;
       margin-bottom: var(--spacing-md);
-      background: var(--gradient-hero);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeIn 1s ease;
+      animation: fadeIn 1s ease, float-gentle 6s ease-in-out infinite;
     }
-    
+
     .hero-tagline {
       font-size: 1.5rem;
       color: var(--color-text-secondary);
       margin-bottom: var(--spacing-sm);
       animation: fadeIn 1.2s ease;
     }
-    
+
     .hero-description {
       font-size: 1.1rem;
       color: var(--color-text-muted);
       margin-bottom: var(--spacing-xl);
       animation: fadeIn 1.4s ease;
     }
-    
+
     .school-badge {
       display: inline-flex;
       align-items: center;
       gap: var(--spacing-xs);
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.3);
       padding: var(--spacing-xs) var(--spacing-md);
       border-radius: var(--radius-xl);
       margin-bottom: var(--spacing-lg);
-      animation: fadeIn 0.8s ease;
+      animation: fadeIn 0.8s ease, pulse-glow 3s ease-in-out infinite;
     }
-    
+
     .school-badge span {
       font-weight: 600;
-      color: var(--color-primary-light);
+      color: var(--space-accent-blue);
     }
-    
-    /* Section Cards */
+
+    /* Section Cards - Glassmorphism */
     .sections {
       padding: var(--spacing-2xl) var(--spacing-md);
       position: relative;
+      background: linear-gradient(180deg, #1e3a8a 0%, #0f172a 100%);
     }
-    
+
     .section-title {
       text-align: center;
       margin-bottom: var(--spacing-xl);
     }
-    
+
     .section-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -111,19 +139,22 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    
+
     .section-card {
-      background: var(--color-bg-card);
+      background: rgba(30, 41, 59, 0.4);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       border-radius: var(--radius-lg);
       padding: var(--spacing-xl);
       text-align: center;
       cursor: pointer;
       transition: all var(--transition-normal);
-      border: 2px solid transparent;
       position: relative;
       overflow: hidden;
     }
-    
+
     .section-card::before {
       content: '';
       position: absolute;
@@ -131,64 +162,65 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(167, 139, 250, 0.2) 100%);
       opacity: 0;
       transition: opacity var(--transition-normal);
       z-index: 0;
     }
-    
+
     .section-card:hover::before {
-      opacity: 0.1;
+      opacity: 1;
     }
-    
+
     .section-card:hover {
       transform: translateY(-10px) scale(1.02);
-      border-color: var(--color-primary);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      border-color: rgba(96, 165, 250, 0.5);
+      box-shadow: 0 12px 40px rgba(96, 165, 250, 0.3);
     }
-    
+
     .section-card-content {
       position: relative;
       z-index: 1;
     }
-    
+
     .section-icon {
       font-size: 4rem;
       margin-bottom: var(--spacing-md);
-      filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3));
+      filter: drop-shadow(0 4px 12px rgba(96, 165, 250, 0.4));
+      animation: float-gentle 4s ease-in-out infinite;
     }
-    
+
     .section-card h3 {
       margin-bottom: var(--spacing-sm);
       color: var(--color-text-primary);
     }
-    
+
     .section-card p {
       color: var(--color-text-muted);
       margin-bottom: var(--spacing-md);
     }
-    
+
     .section-badge {
       display: inline-block;
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
       color: white;
       padding: 0.4rem 1rem;
       border-radius: var(--radius-xl);
       font-size: 0.85rem;
       font-weight: 600;
     }
-    
+
     .coming-soon {
       opacity: 0.6;
       cursor: not-allowed;
     }
-    
+
     .coming-soon:hover {
       transform: none;
-      border-color: transparent;
-      box-shadow: var(--shadow-md);
+      border-color: rgba(255, 255, 255, 0.125);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     }
-    
+
     /* Footer */
     .footer {
       text-align: center;
@@ -196,39 +228,40 @@
       background: var(--color-bg-secondary);
       margin-top: var(--spacing-2xl);
     }
-    
+
     .footer p {
       color: var(--color-text-muted);
     }
-    
+
     .footer-gradient-text {
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-weight: 600;
     }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
       .hero-logo {
         font-size: 3rem;
       }
-      
+
       .hero-tagline {
         font-size: 1.2rem;
       }
-      
+
       .hero-description {
         font-size: 1rem;
       }
-      
+
       .section-icon {
         font-size: 3rem;
       }
     }
   </style>
 </head>
+
 <body>
   <!-- Hero Section -->
   <section class="hero">
@@ -238,20 +271,20 @@
         <span>•</span>
         <span>SMA Brigjend Katamso 2 Medan</span>
       </div>
-      
-      <h1 class="hero-logo">SciFanor</h1>
+
+      <h1 class="hero-logo space-gradient-text">SciFanor</h1>
       <p class="hero-tagline">Science for <strong>IPS</strong> Students</p>
       <p class="hero-description">
         Portal pembelajaran sains interaktif untuk siswa IPS.<br>
         Mewujudkan pembelajaran sains yang menyenangkan dan bermakna.
       </p>
-      
+
       <a href="#sections" class="btn btn-primary">
         Jelajahi Project Kami ✨
       </a>
     </div>
   </section>
-  
+
   <!-- Sections -->
   <section id="sections" class="sections">
     <div class="container">
@@ -261,7 +294,7 @@
           Kumpulan project sains semester 2 yang telah kami kerjakan dengan penuh dedikasi
         </p>
       </div>
-      
+
       <div class="section-cards">
         <!-- Biology Project Card -->
         <div class="section-card" onclick="location.href='biology.html'">
@@ -269,12 +302,13 @@
             <div class="section-icon">🌱</div>
             <h3>Identifikasi Taksonomi Tumbuhan</h3>
             <p>
-              Eksplorasi klasifikasi tumbuhan di taman sekolah kami dengan sistem taksonomi lengkap dari Kingdom hingga Spesies.
+              Eksplorasi klasifikasi tumbuhan di taman sekolah kami dengan sistem taksonomi lengkap dari Kingdom hingga
+              Spesies.
             </p>
             <span class="section-badge">Biologi</span>
           </div>
         </div>
-        
+
         <!-- Placeholder for future projects -->
         <div class="section-card coming-soon">
           <div class="section-card-content">
@@ -286,7 +320,7 @@
             <span class="section-badge" style="background: var(--color-text-muted);">Coming Soon</span>
           </div>
         </div>
-        
+
         <div class="section-card coming-soon">
           <div class="section-card-content">
             <div class="section-icon">🌍</div>
@@ -300,7 +334,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Footer -->
   <footer class="footer">
     <p>
@@ -310,8 +344,11 @@
       SMA Brigjend Katamso 2 Medan • 2026
     </p>
   </footer>
-  
+
   <!-- Scripts -->
+  <script src="js/utilities.js"></script>
+  <script src="js/space-animations.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>

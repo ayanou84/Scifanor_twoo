@@ -1,0 +1,273 @@
+/* ==============================
+   Plant Detail Page Enhancements
+   Interactive Anatomy & Media
+   ============================== */
+
+/* Plant Anatomy Section */
+.anatomy-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    background: var(--life-bg-secondary);
+    display: none;
+    /* Hidden by default, shown via JS if images exist */
+}
+
+.anatomy-section h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    color: var(--life-text-primary);
+}
+
+.anatomy-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+/* Plant Illustration SVG */
+.anatomy-illustration {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
+    border: 2px solid var(--life-bg-tertiary);
+}
+
+.plant-illustration {
+    position: relative;
+}
+
+.plant-svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05));
+}
+
+.plant-part {
+    transition: all 0.3s ease;
+    cursor: pointer !important;
+}
+
+.plant-part:hover {
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+    transform: scale(1.05);
+}
+
+.anatomy-legend {
+    margin-top: var(--spacing-md);
+    text-align: center;
+}
+
+.anatomy-legend h4 {
+    font-size: 0.95rem;
+    color: var(--life-text-muted);
+    font-weight: 500;
+}
+
+/* Anatomy Gallery Grid */
+.anatomy-gallery {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
+    border: 2px solid var(--life-bg-tertiary);
+}
+
+.anatomy-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.anatomy-gallery-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid var(--life-bg-tertiary);
+    background: var(--life-bg-primary);
+}
+
+.anatomy-gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.2);
+    border-color: var(--life-green-primary);
+}
+
+.gallery-thumbnail {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-label {
+    padding: var(--spacing-sm);
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    justify-content: center;
+}
+
+.gallery-icon {
+    font-size: 1.2rem;
+}
+
+.gallery-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--life-text-primary);
+}
+
+/* YouTube Embed Section */
+.youtube-section {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    background: var(--life-bg-primary);
+    display: none;
+    /* Hidden by default, shown via JS if URL exists */
+}
+
+.youtube-embed-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.youtube-embed-container h3 {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--life-text-primary);
+    font-size: 2rem;
+}
+
+.youtube-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 3px solid var(--life-bg-tertiary);
+}
+
+.youtube-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-md);
+}
+
+/* Enhanced Taxonomy Cards */
+.taxonomy-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.taxonomy-description {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--life-bg-tertiary);
+    font-size: 0.9rem;
+    color: var(--life-text-muted);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Hero Share Button */
+.hero-share-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--life-green-primary);
+    color: var(--life-green-primary);
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    z-index: 10;
+}
+
+.hero-share-btn:hover {
+    background: var(--life-green-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+/* Plant Hero Image Cursor */
+.plant-hero-image {
+    cursor: zoom-in;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .anatomy-container {
+        grid-template-columns: 1fr;
+    }
+
+    .anatomy-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+
+    .anatomy-section,
+    .youtube-section {
+        padding: var(--spacing-xl) var(--spacing-sm);
+    }
+
+    .anatomy-illustration,
+    .anatomy-gallery {
+        padding: var(--spacing-md);
+    }
+
+    .gallery-thumbnail {
+        height: 120px;
+    }
+
+    .hero-share-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .anatomy-legend h4 {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .anatomy-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .gallery-thumbnail {
+        height: 100px;
+    }
+
+    .gallery-label {
+        padding: 4px 8px;
+    }
+
+    .gallery-icon {
+        font-size: 1rem;
+    }
+
+    .gallery-text {
+        font-size: 0.75rem;
+    }
+}
