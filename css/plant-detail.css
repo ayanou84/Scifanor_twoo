@@ -3,12 +3,114 @@
    Interactive Anatomy & Media
    ============================== */
 
+/* ==============================
+   Plant Detail Page - Nature Theme
+   ============================== */
+
+/* Plant Hero - Light & Airy */
+.plant-hero {
+    background: linear-gradient(180deg, var(--life-bg-secondary) 0%, #ffffff 100%);
+    padding-bottom: 4rem;
+}
+
+.plant-hero h1 {
+    color: var(--life-green-dark);
+}
+
+.plant-hero-latin {
+    color: var(--life-green-primary);
+}
+
+/* Taxonomy Cards */
+.taxonomy-section {
+    background: #ffffff;
+}
+
+.taxonomy-card {
+    background: var(--life-bg-secondary);
+    border: 1px solid var(--life-bg-tertiary);
+    border-left: 4px solid var(--life-green-primary);
+    box-shadow: none;
+    transition: transform 0.3s ease;
+}
+
+.taxonomy-card:hover {
+    transform: translateX(8px);
+    background: #ffffff;
+    box-shadow: var(--life-card-shadow);
+}
+
+.taxonomy-level {
+    color: var(--life-green-dark);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.taxonomy-value {
+    color: var(--life-text-primary);
+}
+
+.taxonomy-value.italic {
+    color: var(--life-text-primary);
+}
+
+.taxonomy-card:hover .taxonomy-value,
+.taxonomy-card:hover .taxonomy-level {
+    color: var(--life-text-primary) !important;
+}
+
 /* Plant Anatomy Section */
 .anatomy-section {
-    padding: var(--spacing-2xl) var(--spacing-md);
+    background: #ffffff;
+    border-top: 1px solid var(--life-bg-tertiary);
+    border-bottom: 1px solid var(--life-bg-tertiary);
+}
+
+.anatomy-illustration {
     background: var(--life-bg-secondary);
-    display: none;
-    /* Hidden by default, shown via JS if images exist */
+    border: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.anatomy-gallery {
+    background: white;
+    border: none;
+    box-shadow: none;
+}
+
+.anatomy-gallery-item {
+    background: #ffffff;
+    border: 1px solid var(--life-bg-tertiary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.anatomy-gallery-item:hover {
+    border-color: var(--life-green-primary);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+}
+
+/* Info Section */
+.info-section {
+    background: var(--life-bg-secondary);
+}
+
+.info-card {
+    background: #ffffff;
+    border: 1px solid var(--life-bg-tertiary);
+    box-shadow: var(--life-card-shadow);
+}
+
+.info-card h3 {
+    color: var(--life-green-dark);
+}
+
+.info-card p {
+    color: var(--life-text-secondary);
+}
+
+/* YouTube Section */
+.youtube-section {
+    background: #ffffff;
 }
 
 .anatomy-section h2 {

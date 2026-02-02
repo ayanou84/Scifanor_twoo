@@ -1,6 +1,32 @@
 // Dashboard CRUD Logic - Enhanced with Multiple Images, Taxonomy Descriptions, YouTube
 // Using window.supabaseClient directly
 
+// Fallback for showToast to prevent crashes if utilities.js fails to load
+if (typeof window.showToast !== 'function') {
+    window.showToast = function (message, type = 'info') {
+        console.warn('Using fallback showToast:', message);
+
+        // Try to create valid toast UI
+        const container = document.querySelector('.toast-container') || (() => {
+            const c = document.createElement('div');
+            c.className = 'toast-container';
+            document.body.appendChild(c);
+            return c;
+        })();
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        toast.style.cssText = 'background: #333; color: #fff; padding: 12px 24px; margin-top: 10px; border-radius: 4px; animation: fadeIn 0.3s;';
+        if (type === 'error') toast.style.background = '#e74c3c';
+        if (type === 'success') toast.style.background = '#2ecc71';
+
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    };
+}
+
+
 // DOM Elements
 const plantsListEl = document.getElementById('plantsList');
 const plantsLoadingEl = document.getElementById('plantsLoading');
@@ -19,7 +45,8 @@ let uploadedImages = {
     root: null,
     stem: null,
     leaf: null,
-    fruit: null
+    fruit: null,
+    flower: null
 };
 
 // Initial Load - Called from auth.js when user is logged in
@@ -108,7 +135,8 @@ window.showAddPlantForm = function () {
         root: null,
         stem: null,
         leaf: null,
-        fruit: null
+        fruit: null,
+        flower: null
     };
 
     plantFormContainer.style.display = 'block';
@@ -183,7 +211,7 @@ window.editPlant = async function (id) {
 
 // Setup Image Upload Handlers
 function setupImageUploadHandlers() {
-    const imageParts = ['full_plant', 'root', 'stem', 'leaf', 'fruit'];
+    const imageParts = ['full_plant', 'root', 'stem', 'leaf', 'fruit', 'flower'];
 
     imageParts.forEach(part => {
         const inputId = part === 'full_plant' ? 'imageFullPlant' : `image${part.charAt(0).toUpperCase() + part.slice(1)}`;
@@ -285,7 +313,8 @@ window.removeImage = function (part) {
             root: '🌱 Akar',
             stem: '🎋 Batang',
             leaf: '🍃 Daun',
-            fruit: '🌸 Bunga/Buah'
+            fruit: '🍎 Buah',
+            flower: '🌻 Bunga'
         };
         const [icon, ...textParts] = partLabels[part].split(' ');
         previewArea.innerHTML = `
@@ -312,7 +341,7 @@ function displayExistingImages(images) {
 
 // Clear Image Previews
 function clearImagePreviews() {
-    const parts = ['full_plant', 'root', 'stem', 'leaf', 'fruit'];
+    const parts = ['full_plant', 'root', 'stem', 'leaf', 'fruit', 'flower'];
     parts.forEach(part => {
         const previewArea = document.getElementById(`preview-${part}`);
         if (previewArea && previewArea.classList.contains('has-image')) {

@@ -1,7 +1,152 @@
 /* ==============================
-   Biology Section - Life Theme
-   White & Green Professional Design
+   Biology Section - Nature Theme
+   Fresh, Light & Organic Design
    ============================== */
+
+/* Nature Theme Color Variables */
+:root {
+    --life-bg-primary: #ffffff;
+    --life-bg-secondary: #f0fdf4;
+    /* Mint cream */
+    --life-bg-tertiary: #dcfce7;
+    /* Soft green */
+    --life-green-primary: #10b981;
+    --life-green-secondary: #059669;
+    --life-green-light: #6ee7b7;
+    --life-green-dark: #047857;
+    --life-accent: #f59e0b;
+    /* Pollen/Sun yellow */
+    --life-text-primary: #1f2937;
+    --life-text-secondary: #4b5563;
+    --life-text-muted: #6b7280;
+    --life-card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* Force Light Theme */
+body {
+    background-color: var(--life-bg-primary);
+    color: var(--life-text-primary);
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.03) 0%, transparent 20%);
+    background-attachment: fixed;
+}
+
+/* Navigation - Glassmorphism Light */
+.nav {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.nav-brand {
+    color: var(--life-green-dark);
+}
+
+.nav-link {
+    color: var(--life-text-secondary);
+}
+
+.nav-link:hover {
+    background: var(--life-bg-secondary);
+    color: var(--life-green-dark);
+}
+
+/* Hero Section - Nature Illustrated */
+.bio-hero {
+    background: linear-gradient(180deg, var(--life-bg-secondary) 0%, #ffffff 100%);
+    padding: 6rem 1rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Organic Background Patterns (Busier & More Vibrant) */
+.bio-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Layered organic patterns for a "crowded" nature look */
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.1) 0%, transparent 25%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2310b981' fill-opacity='0.08'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: cover, cover, auto;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    z-index: 0;
+}
+
+.bio-title {
+    color: var(--life-green-dark);
+    font-weight: 800;
+}
+
+.bio-description {
+    color: var(--life-text-secondary);
+}
+
+.project-badge {
+    background: var(--life-bg-primary);
+    border-color: var(--life-green-primary);
+    color: var(--life-green-dark);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.1);
+}
+
+/* Plants Grid */
+.plants-section {
+    background: transparent;
+}
+
+/* Plant Card - Nature Style */
+.plant-card {
+    background: white;
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    box-shadow: var(--life-card-shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.plant-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px -5px rgba(16, 185, 129, 0.15);
+    border-color: var(--life-green-light);
+}
+
+.plant-image-container {
+    background: #e2e8f0;
+}
+
+.plant-name {
+    color: var(--life-text-primary);
+}
+
+.plant-latin {
+    color: var(--life-green-primary);
+}
+
+.plant-family {
+    background: var(--life-bg-secondary);
+    color: var(--life-green-dark);
+    border: 1px solid var(--life-bg-tertiary);
+}
+
+/* Empty State */
+.empty-icon {
+    font-size: 4rem;
+    filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.2));
+}
+
+/* Footer - Light */
+.footer {
+    background: white;
+    border-top: 1px solid var(--life-bg-tertiary);
+}
+
+.footer p {
+    color: var(--life-text-muted);
+}
 
 /* Life Theme Color Variables */
 :root {

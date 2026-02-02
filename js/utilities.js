@@ -350,8 +350,14 @@ function getYouTubeEmbedUrl(url) {
     return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 }
 
+// Wrapper function for easier use
+function showToast(message, type = 'info', title = '') {
+    return toast.show(message, type, title);
+}
+
 // Export utilities
 window.toast = toast;
+window.showToast = showToast; // Add wrapper
 window.lightbox = lightbox;
 window.shareUrl = shareUrl;
 window.sharePlant = sharePlant;

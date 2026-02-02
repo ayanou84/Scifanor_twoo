@@ -12,7 +12,15 @@ const SUPABASE_ANON_KEY = typeof process !== 'undefined' && process.env.SUPABASE
 // Initialize Supabase client
 const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-console.log('✅ Supabase client initialized');
+console.log('✅ Supabase client initialized', { url: SUPABASE_URL });
+
+// Verify connection
+sbClient.from('plants').select('count', { count: 'exact', head: true })
+    .then(({ count, error }) => {
+        if (error) console.error('❌ Supabase connection test failed:', error);
+        else console.log('✅ Supabase connection confirmed. Plant count:', count);
+    });
+
 
 // Export for use in other modules
 window.supabaseClient = sbClient;
