@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin | SciFanor</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +29,7 @@
             <h1>🔐 Admin Login</h1>
             <p>Dashboard SciFanor</p>
 
-            <form id="loginForm" class="login-form">
+            <form id="loginForm" class="login-form" autocomplete="on">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" required placeholder="admin@scifanor.local">
@@ -67,11 +68,29 @@
         </header>
 
         <!-- Navigation -->
-        <nav class="dashboard-nav">
-            <div class="container-wide">
-                <a href="index.html" class="nav-link">🏠 Homepage</a>
-                <a href="biology.html" class="nav-link">🌱 Lihat Biology Section</a>
-                <a href="qr-generator.html" class="nav-link">🎯 QR Generator</a>
+        <!-- Global Navigation -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="index.html" class="navbar-brand">
+                    <img src="images/favicon.png" alt="Scifanor" class="navbar-logo"
+                        onerror="this.style.display='none';">
+                    <span class="navbar-title">Scifanor</span>
+                </a>
+
+                <button class="mobile-menu-toggle">☰</button>
+
+                <div class="navbar-menu">
+                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="biology.html" class="nav-link">Koleksi</a>
+                    <a href="scifanor.html" class="nav-link">Tentang</a>
+                    <!-- Dashboard Specific Links (Consolidated for Mobile) -->
+                    <a href="qr-generator.html" class="nav-link mobile-only">🎯 QR Generator</a>
+                    <a href="profile-editor.html" class="nav-link mobile-only">✏️ Edit Profil</a>
+                    <button onclick="logout()" class="nav-link mobile-only"
+                        style="background:none; border:none; text-align:left; padding:0; font:inherit; cursor:pointer;">🚪
+                        Logout</button>
+                    <a href="dashboard.html" class="nav-btn active">Dashboard</a>
+                </div>
             </div>
         </nav>
 
@@ -89,10 +108,17 @@
                 <div id="plantFormContainer" class="form-container" style="display: none;">
                     <div class="form-header">
                         <h2 id="formTitle">Tambah Tumbuhan Baru</h2>
-                        <button onclick="hideForm()" class="btn-close">✕</button>
+                        <div class="form-header-actions">
+                            <span id="collabPlaceholder" class="text-hint"
+                                style="display: none; font-size: 0.8rem; margin-right: 10px; color: #94a3b8;">Simpan
+                                dulu untuk tambah kolaborator</span>
+                            <button id="btnManageCollabForm" type="button" class="btn-icon btn-collab"
+                                style="display: none;" title="Kelola Kolaborator">👥</button>
+                            <button onclick="hideForm()" class="btn-close">✕</button>
+                        </div>
                     </div>
 
-                    <form id="plantForm" class="plant-form">
+                    <form id="plantForm" class="plant-form" autocomplete="off">
                         <input type="hidden" id="plantId">
 
                         <div class="form-grid">
@@ -366,7 +392,9 @@
     <script src="js/utilities.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/collaborator-manager.js"></script>
+    <script src="js/activity-logger.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 
 </html>
+<script src="js/navbar.js"></script>

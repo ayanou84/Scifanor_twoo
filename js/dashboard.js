@@ -40,6 +40,10 @@ const formErrorEl = document.getElementById('formError');
 // State
 let isEditing = false;
 let editingId = null;
+let currentUserId = null;
+let isAdmin = false; // Admin state
+let originalPlantData = null; // Store original state for diffing
+let myCollabPlantIds = new Set();
 let uploadedImages = {
     full_plant: null,
     root: null,
@@ -51,9 +55,35 @@ let uploadedImages = {
 
 // Initial Load - Called from auth.js when user is logged in
 window.loadDashboardPlants = async function () {
+    // Get current user
+    const { data: { user } } = await window.supabaseClient.auth.getUser();
+    currentUserId = user?.id;
+
+    if (currentUserId) {
+        // Fetch profile to check admin status
+        const { data: profile } = await window.supabaseClient
+            .from('profiles')
+            .select('is_admin')
+            .eq('id', currentUserId)
+            .single();
+
+        isAdmin = profile?.is_admin || false;
+
+        // Fetch my collaborations
+        const { data: collabs } = await window.supabaseClient
+            .from('plant_collaborators')
+            .select('plant_id')
+            .eq('user_id', currentUserId);
+
+        if (collabs) {
+            myCollabPlantIds = new Set(collabs.map(c => c.plant_id));
+        }
+    }
+
     await fetchPlants();
     setupRealtimeSubscription();
     setupImageUploadHandlers();
+    setupYouTubePreview();
 };
 
 // Fetch Plants
@@ -95,11 +125,36 @@ function renderPlantsList(plants) {
         const item = document.createElement('div');
         item.className = 'plant-item';
 
+        // Check permissions
+        const isOwner = plant.created_by === currentUserId;
+        const isCollaborator = myCollabPlantIds.has(plant.id);
+        const canEdit = isOwner || isCollaborator || isAdmin;
+        const canDelete = isOwner || isAdmin;
+        const canManageCollab = isOwner || isAdmin;
+
         // Use new images structure or fallback to old image_url
         const mainImage = plant.images?.full_plant || plant.image_url;
         const imageHTML = mainImage
             ? `<img src="${mainImage}" alt="${plant.nama_indonesia}" class="plant-item-image">`
             : `<div class="plant-item-placeholder">🌿</div>`;
+
+        // Buttons HTML
+        let buttonsHTML = '';
+
+        if (canEdit) {
+            buttonsHTML += `<button onclick="editPlant('${plant.id}')" class="btn-icon btn-edit">Edit</button>`;
+        }
+
+        if (canDelete) {
+            // Only show Manage Collab if has permission
+            if (canManageCollab) {
+                buttonsHTML += `<button onclick="showAddCollaboratorModal('${plant.id}')" class="btn-icon btn-collab" title="Kelola Kolaborator">👥</button>`;
+            }
+            buttonsHTML += `<button onclick="deletePlant('${plant.id}')" class="btn-icon btn-delete">Hapus</button>`;
+        }
+
+        // If no actions allowed, show View button (optional/placeholder)
+        // or nothing (just viewable in biology page)
 
         item.innerHTML = `
       ${imageHTML}
@@ -109,9 +164,7 @@ function renderPlantsList(plants) {
         <span class="plant-item-family">${plant.famili || '-'}</span>
       </div>
       <div class="plant-item-actions">
-        <button onclick="editPlant('${plant.id}')" class="btn-icon btn-edit">Edit</button>
-        <button onclick="showAddCollaboratorModal('${plant.id}')" class="btn-icon btn-collab" title="Kelola Kolaborator">👥</button>
-        <button onclick="deletePlant('${plant.id}')" class="btn-icon btn-delete">Hapus</button>
+        ${buttonsHTML}
       </div>
     `;
 
@@ -129,6 +182,12 @@ window.showAddPlantForm = function () {
     plantForm.reset();
     clearImagePreviews();
     formErrorEl.style.display = 'none';
+
+    const btnManageCollab = document.getElementById('btnManageCollabForm');
+    if (btnManageCollab) btnManageCollab.style.display = 'none';
+
+    const collabPlaceholder = document.getElementById('collabPlaceholder');
+    if (collabPlaceholder) collabPlaceholder.style.display = 'inline-block';
 
     // Reset uploaded images state
     uploadedImages = {
@@ -201,6 +260,24 @@ window.editPlant = async function (id) {
         document.getElementById('descGenus').value = descriptions.genus || '';
         document.getElementById('descSpesies').value = descriptions.spesies || '';
 
+        // Capture original state for logging
+        originalPlantData = JSON.parse(JSON.stringify(plant));
+
+        // Show Manage Collaborators button if owner or admin
+        const btnManageCollab = document.getElementById('btnManageCollabForm');
+        const collabPlaceholder = document.getElementById('collabPlaceholder');
+
+        if (collabPlaceholder) collabPlaceholder.style.display = 'none';
+
+        if (btnManageCollab) {
+            if (plant.created_by === currentUserId || isAdmin) {
+                btnManageCollab.style.display = 'inline-flex';
+                btnManageCollab.onclick = () => window.showAddCollaboratorModal(id);
+            } else {
+                btnManageCollab.style.display = 'none';
+            }
+        }
+
         plantFormContainer.style.display = 'block';
         plantFormContainer.scrollIntoView({ behavior: 'smooth' });
 
@@ -209,6 +286,52 @@ window.editPlant = async function (id) {
         window.showToast('Gagal memuat data untuk diedit', 'error');
     }
 };
+
+// Setup YouTube Preview
+function setupYouTubePreview() {
+    const urlInput = document.getElementById('youtubeUrl');
+    const previewContainer = document.createElement('div');
+    previewContainer.id = 'youtubePreview';
+    previewContainer.style.marginTop = '10px';
+    previewContainer.style.display = 'none';
+
+    // Insert preview container after input
+    urlInput.parentNode.appendChild(previewContainer);
+
+    // Listen for changes
+    urlInput.addEventListener('input', window.debounce(async () => {
+        const url = urlInput.value.trim();
+        previewContainer.innerHTML = '';
+
+        if (!url) {
+            previewContainer.style.display = 'none';
+            return;
+        }
+
+        const videoId = window.getYouTubeVideoId(url);
+
+        if (videoId) {
+            previewContainer.style.display = 'block';
+            previewContainer.innerHTML = `
+                <div style="background: #1a1a1a; padding: 10px; border-radius: 8px;">
+                    <p style="margin-bottom: 5px; font-size: 0.9rem; color: #aaa;">Preview Video:</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 6px;">
+                        <iframe 
+                            src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            frameborder="0" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p style="margin-top: 5px; color: #4ade80; font-size: 0.8rem;">✓ Link valid</p>
+                </div>
+            `;
+        } else {
+            previewContainer.style.display = 'block';
+            previewContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.9rem;">✕ Link tidak valid (Pastikan link YouTube benar)</p>`;
+        }
+    }, 500));
+}
 
 // Setup Image Upload Handlers
 function setupImageUploadHandlers() {
@@ -409,11 +532,31 @@ plantForm.addEventListener('submit', async (e) => {
                 .update(plantData)
                 .eq('id', editingId);
             error = updateError;
+
+            // Log Activity
+            if (!error && window.ActivityLogger && originalPlantData) {
+                const details = window.ActivityLogger.generateUpdateDetails(originalPlantData, plantData);
+                if (details) {
+                    await window.ActivityLogger.log(editingId, 'update', details);
+                }
+            }
+
         } else {
-            const { error: insertError } = await window.supabaseClient
+            // Set creator explicitly
+            plantData.created_by = currentUserId;
+
+            const { data, error: insertError } = await window.supabaseClient
                 .from('plants')
-                .insert([plantData]);
+                .insert([plantData])
+                .select(); // Select to get ID
+
             error = insertError;
+
+            // Log Activity (Create)
+            if (!error && data && data.length > 0 && window.ActivityLogger) {
+                const newId = data[0].id; // Get generated ID
+                await window.ActivityLogger.log(newId, 'create', 'Membuat tumbuhan baru');
+            }
         }
 
         if (error) throw error;

@@ -331,23 +331,19 @@ function isValidYouTubeUrl(url) {
 // Extract YouTube video ID
 function getYouTubeVideoId(url) {
     if (!url) return null;
-    const patterns = [
-        /youtube\.com\/watch\?v=([^&]+)/,
-        /youtu\.be\/([^?]+)/,
-        /youtube\.com\/embed\/([^?]+)/
-    ];
 
-    for (const pattern of patterns) {
-        const match = url.match(pattern);
-        if (match) return match[1];
-    }
-    return null;
+    // Robust regex to handle youtu.be, youtube.com/watch, embed, v, etc.
+    // Handles parameters like ?si=..., &feature=... correctly
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11) ? match[2] : null;
 }
 
 // Create YouTube embed URL
 function getYouTubeEmbedUrl(url) {
     const videoId = getYouTubeVideoId(url);
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0` : null;
 }
 
 // Wrapper function for easier use

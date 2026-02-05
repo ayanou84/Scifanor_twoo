@@ -7,13 +7,13 @@
   --color-secondary-dark: #059669;
   --color-accent: #f59e0b;
   --color-accent-dark: #d97706;
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-science: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  
+
   /* Neutral Colors */
   --color-bg-primary: #0f172a;
   --color-bg-secondary: #1e293b;
@@ -21,7 +21,7 @@
   --color-text-primary: #f1f5f9;
   --color-text-secondary: #cbd5e1;
   --color-text-muted: #94a3b8;
-  
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -29,23 +29,23 @@
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
-  
+
   /* Border Radius */
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
-  
+
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
   --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.4);
-  
+
   /* Typography */
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
-  
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -72,19 +72,41 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
 }
 
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 2rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
 
 p {
   margin-bottom: var(--spacing-sm);
@@ -198,9 +220,17 @@ a:hover {
   gap: var(--spacing-lg);
 }
 
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 
 /* Flexbox Utilities */
 .flex {
@@ -225,23 +255,63 @@ a:hover {
 }
 
 /* Spacing Utilities */
-.mt-1 { margin-top: var(--spacing-sm); }
-.mt-2 { margin-top: var(--spacing-md); }
-.mt-3 { margin-top: var(--spacing-lg); }
-.mt-4 { margin-top: var(--spacing-xl); }
+.mt-1 {
+  margin-top: var(--spacing-sm);
+}
 
-.mb-1 { margin-bottom: var(--spacing-sm); }
-.mb-2 { margin-bottom: var(--spacing-md); }
-.mb-3 { margin-bottom: var(--spacing-lg); }
-.mb-4 { margin-bottom: var(--spacing-xl); }
+.mt-2 {
+  margin-top: var(--spacing-md);
+}
 
-.py-1 { padding-top: var(--spacing-sm); padding-bottom: var(--spacing-sm); }
-.py-2 { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
-.py-3 { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); }
-.py-4 { padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); }
+.mt-3 {
+  margin-top: var(--spacing-lg);
+}
+
+.mt-4 {
+  margin-top: var(--spacing-xl);
+}
+
+.mb-1 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-xl);
+}
+
+.py-1 {
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+}
+
+.py-2 {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+.py-3 {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+}
+
+.py-4 {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
 
 /* Text Utilities */
-.text-center { text-align: center; }
+.text-center {
+  text-align: center;
+}
+
 .text-gradient {
   background: var(--gradient-primary);
   -webkit-background-clip: text;
@@ -255,6 +325,7 @@ a:hover {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -266,6 +337,7 @@ a:hover {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -277,6 +349,7 @@ a:hover {
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -284,9 +357,12 @@ a:hover {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -315,31 +391,57 @@ a:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.75rem; }
-  
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
-  
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
   .grid-4,
   .grid-3,
   .grid-2 {
     grid-template-columns: 1fr;
   }
-  
+
   .container,
   .container-wide {
     padding: 0 var(--spacing-sm);
@@ -347,9 +449,14 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: 1.75rem; }
-  h2 { font-size: 1.5rem; }
-  
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
   .btn {
     padding: 0.6rem 1.5rem;
     font-size: 0.9rem;
@@ -378,4 +485,341 @@ a:hover {
 ::selection {
   background: var(--color-primary);
   color: white;
+}
+
+/* =========================================
+   Global Navigation (Justinmind Style)
+   ========================================= */
+.navbar {
+  background: rgba(15, 23, 42, 0.95);
+  /* Default Dark Slate 900 */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+/* Nature Theme (Biology/Plant Detail) */
+.navbar.theme-nature {
+  background: #10b981 !important;
+  /* Bright Emerald Green from user request */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.navbar.theme-nature .navbar-title,
+.navbar.theme-nature .nav-link {
+  color: white !important;
+  /* High contrast white text */
+}
+
+.navbar.theme-nature .nav-link:hover,
+.navbar.theme-nature .nav-link.active,
+.navbar.theme-nature .nav-btn.active {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+/* Style active indicator in mobile menu for Nature theme */
+@media (max-width: 768px) {
+
+  .navbar.theme-nature .navbar-menu .nav-link.active,
+  .navbar.theme-nature .navbar-menu .nav-btn.active {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-left-color: #ffffff !important;
+  }
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo Section */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.02);
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  /* Changed to white for dark background */
+  letter-spacing: -0.5px;
+}
+
+/* Navigation Links */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  /* Light color for dark background */
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #6366f1;
+  /* Indigo from user request */
+}
+
+.nav-btn {
+  background: var(--life-green-primary);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+}
+
+.nav-btn:hover {
+  background: var(--life-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Mobile Menu Toggle (Hidden on Desktop) */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white !important;
+  /* White for dark navbar visibility */
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 70px;
+    /* Below navbar */
+    left: 0;
+    right: 0;
+    /* Semi-transparent gradient background as requested */
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: center;
+    /* Center all items horizontally */
+    padding: 3rem 2rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-150%);
+    /* Hidden by default */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+  }
+
+  .navbar-menu.active {
+    transform: translateY(0);
+  }
+
+  .navbar-title {
+    font-size: 1.25rem;
+  }
+
+  .navbar-logo {
+    height: 32px;
+  }
+
+  /* Force light text on dark gradient menu for readability */
+  .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.2rem;
+    text-shadow: none !important;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #6366f1 !important;
+  }
+}
+
+/* =========================================
+   Transparent Navbar Variant (Home/Dark Hero)
+   ========================================= */
+.navbar.transparent {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+  box-shadow: none;
+  position: absolute;
+  /* Overlay on hero */
+  width: 100%;
+}
+
+.navbar.transparent .navbar-title {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.navbar.transparent .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.navbar.transparent .nav-link:hover,
+.navbar.transparent .nav-link.active {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.navbar.transparent .mobile-menu-toggle {
+  color: white;
+}
+
+/* Fix mobile menu text color for transparent navbar */
+@media (max-width: 768px) {
+
+  /* No need to override background to white anymore since we use a global dark gradient */
+  .navbar.transparent .navbar-menu {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 100%);
+  }
+
+  /* Ensure text remains visible (light) even if parent is transparent variant */
+  .navbar.transparent .navbar-menu .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: none !important;
+  }
+
+  .navbar.transparent .navbar-menu .nav-link.active {
+    color: var(--life-green-primary) !important;
+  }
+
+  .navbar.transparent .navbar-menu .navbar-title {
+    color: white;
+    text-shadow: none;
+  }
+
+  /* Ensure hamburger toggle remains visible (white) EXCLUSIVELY on dark hero/transparent nav */
+  .navbar.transparent .mobile-menu-toggle {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* =========================================
+   Dashboard Mobile Refinements
+   ========================================= */
+@media (max-width: 768px) {
+
+  /* Hide the entire header on mobile as requested to save space */
+  .dashboard-header {
+    display: none !important;
+  }
+
+  /* Ensure the mobile-only menu items are displayed inside the hamburger */
+  .navbar-menu .mobile-only {
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Highlight the selected/active link in mobile menu */
+  .navbar-menu .nav-link.active,
+  .navbar-menu .nav-btn.active {
+    background: rgba(99, 102, 241, 0.15) !important;
+    color: #6366f1 !important;
+    padding: 0.75rem 2rem !important;
+    border-radius: 50px !important;
+    /* Pill shape */
+    border: 1px solid rgba(99, 102, 241, 0.3) !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: auto !important;
+    /* Proper pill width */
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* =========================================
+   Scientific Professional Footer
+   ========================================= */
+.footer {
+  background: #0f172a;
+  padding: var(--spacing-3xl) 1rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #10b981);
+  border-radius: 50px;
+}
+
+.footer p {
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+}
+
+.footer-gradient-text {
+  background: linear-gradient(135deg, #10b981, #6366f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }

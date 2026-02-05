@@ -345,13 +345,46 @@
     }
 
     .plant-item {
-        grid-template-columns: 60px 1fr;
-        gap: var(--spacing-sm);
+        grid-template-columns: 80px 1fr;
+        /* Match image size */
+        gap: var(--spacing-md);
+        padding: var(--spacing-sm);
+        align-items: flex-start;
+        /* Better for varying text heights */
+    }
+
+    .plant-item-image,
+    .plant-item-placeholder {
+        width: 70px;
+        /* Slightly smaller for mobile */
+        height: 70px;
+    }
+
+    .plant-item-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+        line-height: 1.2;
+    }
+
+    .plant-item-latin {
+        font-size: 0.8rem;
     }
 
     .plant-item-actions {
         grid-column: 1 / -1;
-        justify-content: flex-end;
+        justify-content: flex-start;
+        margin-top: var(--spacing-xs);
+        gap: var(--spacing-xs);
+        display: flex;
+        /* Ensure horizontal buttons */
+    }
+
+    .btn-icon {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        flex: 1;
+        /* Make buttons fill width equally */
+        text-align: center;
     }
 
     .header-content {

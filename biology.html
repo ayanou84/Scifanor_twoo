@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Project Identifikasi Taksonomi Tumbuhan - Kelas 12 IPS 2">
     <title>Project Biologi - Identifikasi Taksonomi Tumbuhan | SciFanor</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,17 +19,28 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/biology.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- Added global styles -->
     <link rel="stylesheet" href="css/collaborators.css">
     <link rel="stylesheet" href="css/search-filter.css">
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <div class="nav-content">
-                <a href="index.html" class="nav-brand">← SciFanor</a>
-                <a href="dashboard.html" class="nav-link">Dashboard Admin</a>
+    <!-- Global Navigation -->
+    <nav class="navbar theme-nature">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/favicon.png" alt="Scifanor" class="navbar-logo" onerror="this.style.display='none';">
+                <span class="navbar-title">Scifanor</span>
+            </a>
+
+            <button class="mobile-menu-toggle">☰</button>
+
+            <div class="navbar-menu">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <a href="biology.html" class="nav-link active">Koleksi</a>
+                <a href="scifanor.html" class="nav-link">Tentang</a>
+                <a href="dashboard.html" class="nav-btn">Dashboard</a>
             </div>
         </div>
     </nav>
@@ -164,3 +176,4 @@
 </body>
 
 </html>
+<script src="js/navbar.js"></script>

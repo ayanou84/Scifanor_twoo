@@ -8,6 +8,7 @@
     content="SciFanor - Portal pembelajaran sains untuk siswa IPS kelas 12 IPS 2, SMA Brigjend Katamso 2 Medan">
   <meta name="keywords" content="sains, biologi, IPS, pembelajaran, taksonomi, tumbuhan">
   <title>SciFanor - Science for IPS Students</title>
+  <link rel="icon" href="images/favicon.png" type="image/png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -263,6 +264,24 @@
 </head>
 
 <body>
+  <!-- Global Navigation -->
+  <nav class="navbar transparent">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/favicon.png" alt="Scifanor" class="navbar-logo" onerror="this.style.display='none';">
+        <span class="navbar-title">Scifanor</span>
+      </a>
+
+      <button class="mobile-menu-toggle">☰</button>
+
+      <div class="navbar-menu">
+        <a href="index.html" class="nav-link active">Beranda</a>
+        <a href="biology.html" class="nav-link">Koleksi</a>
+        <a href="scifanor.html" class="nav-link">Tentang</a>
+        <a href="dashboard.html" class="nav-btn">Dashboard</a>
+      </div>
+    </div>
+  </nav>
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -419,3 +438,4 @@
 </body>
 
 </html>
+<script src="js/navbar.js"></script>

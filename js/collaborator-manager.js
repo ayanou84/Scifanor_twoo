@@ -309,21 +309,13 @@ async function removeCollaborator(plantId, userId) {
 
 // Log activity
 async function logActivity(action, plantId, details = {}) {
-    try {
-        const { data: { user } } = await window.supabaseClient.auth.getUser();
+    if (window.ActivityLogger) {
+        // Map details to string description
+        let desc = 'Mengubah data kolaborator';
+        if (action === 'add_collaborator') desc = 'Menambahkan kolaborator baru';
+        if (action === 'remove_collaborator') desc = 'Menghapus kolaborator';
 
-        await window.supabaseClient
-            .from('activity_logs')
-            .insert({
-                user_id: user.id,
-                plant_id: plantId,
-                action: action,
-                details: details
-            });
-
-    } catch (error) {
-        console.error('Error logging activity:', error);
-        // Non-critical, don't show error to user
+        await window.ActivityLogger.log(plantId, action, desc);
     }
 }
 

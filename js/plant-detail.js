@@ -153,16 +153,76 @@ function renderPlantDetail(plant) {
         renderYouTubeEmbed(plant.youtube_url);
     }
 
-    // Additional info
-    document.getElementById('plantHabitat').textContent = plant.habitat || 'Informasi habitat belum tersedia';
-    document.getElementById('plantCiri').textContent = plant.ciri_khas || 'Informasi ciri khas belum tersedia';
-    document.getElementById('plantManfaat').textContent = plant.manfaat || 'Informasi manfaat belum tersedia';
+    // Additional info - store full text and show preview
+    const habitatEl = document.getElementById('plantHabitat');
+    const ciriEl = document.getElementById('plantCiri');
+    const manfaatEl = document.getElementById('plantManfaat');
+
+    const habitatText = plant.habitat || 'Informasi habitat belum tersedia';
+    const ciriText = plant.ciri_khas || 'Informasi ciri khas belum tersedia';
+    const manfaatText = plant.manfaat || 'Informasi manfaat belum tersedia';
+
+    // Store full text in data attribute
+    habitatEl.setAttribute('data-full-text', habitatText);
+    ciriEl.setAttribute('data-full-text', ciriText);
+    manfaatEl.setAttribute('data-full-text', manfaatText);
+
+    // Show preview initially
+    habitatEl.textContent = truncateToPreview(habitatText);
+    ciriEl.textContent = truncateToPreview(ciriText);
+    manfaatEl.textContent = truncateToPreview(manfaatText);
 
     // Render collaborators
     renderCollaborators(plant);
 
+    // Load and render history
+    loadActivityHistory(plant.id);
+
     // Show content
     showContent();
+}
+
+// Load Activity History
+async function loadActivityHistory(plantId) {
+    const historySection = document.getElementById('historySection');
+    const timelineEl = document.getElementById('activityTimeline');
+
+    if (!window.ActivityLogger) return;
+
+    try {
+        const activities = await window.ActivityLogger.getActivities(plantId);
+
+        if (activities && activities.length > 0) {
+            historySection.style.display = 'block';
+            timelineEl.innerHTML = '';
+
+            activities.forEach(activity => {
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+
+                const user = activity.profiles || { full_name: 'Unknown User' };
+                const timeAgo = window.ActivityLogger.timeAgo(activity.created_at);
+
+                // Format action text
+                let actionText = activity.details || activity.action_type;
+
+                item.innerHTML = `
+                    <div class="activity-header">
+                        <span class="activity-user">${user.full_name}</span>
+                        <span class="activity-time">• ${timeAgo}</span>
+                    </div>
+                    <div class="activity-details">
+                        ${actionText}
+                    </div>
+                `;
+
+                timelineEl.appendChild(item);
+            });
+        }
+
+    } catch (error) {
+        console.error('Error loading history:', error);
+    }
 }
 
 // Render Plant Anatomy Visualization
@@ -197,12 +257,24 @@ function renderTaxonomy(plant) {
             const valueClass = level.isItalic ? 'taxonomy-value italic' : 'taxonomy-value';
             const description = descriptions[level.key];
 
+            // Add class if has description
+            if (description) {
+                card.classList.add('has-description');
+            }
+
             card.innerHTML = `
                 <div class="taxonomy-icon">${level.icon}</div>
                 <div class="taxonomy-level">${level.label}</div>
                 <div class="${valueClass}">${value}</div>
                 ${description ? `<div class="taxonomy-description">${description}</div>` : ''}
             `;
+
+            // Add click handler if has description
+            if (description) {
+                card.addEventListener('click', function () {
+                    this.classList.toggle('expanded');
+                });
+            }
 
             taxonomyGridEl.appendChild(card);
 
@@ -321,4 +393,51 @@ function showContent() {
     loadingEl.style.display = 'none';
     errorEl.style.display = 'none';
     contentEl.style.display = 'block';
+}
+
+// Toggle Section (Collapsible)
+window.toggleSection = function (contentId) {
+    const content = document.getElementById(contentId);
+    const toggleBtn = document.getElementById(contentId.replace('Content', 'Toggle'));
+
+    if (content && toggleBtn) {
+        content.classList.toggle('collapsed');
+        toggleBtn.classList.toggle('collapsed');
+    }
+};
+
+// Toggle Info Card (Habitat, Ciri, Manfaat)
+window.toggleInfoCard = function (headerElement) {
+    const card = headerElement.closest('.collapsible-card');
+    const toggle = headerElement.querySelector('.info-toggle');
+    const content = card.querySelector('.info-content p');
+
+    const isExpanded = card.classList.contains('expanded');
+    const fullText = content.getAttribute('data-full-text');
+
+    if (isExpanded) {
+        // Collapse - show preview
+        content.textContent = truncateToPreview(fullText);
+        card.classList.remove('expanded');
+    } else {
+        // Expand - show full text
+        content.textContent = fullText;
+        card.classList.add('expanded');
+    }
+
+    toggle.classList.toggle('rotated');
+};
+
+// Truncate text to first paragraph for preview
+function truncateToPreview(text, maxLength = 150) {
+    if (!text || text === '-') return text;
+
+    // Split by line breaks or periods to get first sentence/paragraph
+    const firstParagraph = text.split(/\n\n|\. /)[0];
+
+    if (firstParagraph.length > maxLength) {
+        return firstParagraph.substring(0, maxLength) + '...';
+    }
+
+    return firstParagraph + (text.length > firstParagraph.length ? '...' : '');
 }
