@@ -16,10 +16,10 @@ if (typeof window.showToast !== 'function') {
 
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
-        toast.textContent = message;
+        toast.innerHTML = message;
         toast.style.cssText = 'background: #333; color: #fff; padding: 12px 24px; margin-top: 10px; border-radius: 4px; animation: fadeIn 0.3s;';
-        if (type === 'error') toast.style.background = '#e74c3c';
-        if (type === 'success') toast.style.background = '#2ecc71';
+        if (type === 'error') toast.style.background = '#ef4444';
+        if (type === 'success') toast.style.background = '#10b981';
 
         container.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
@@ -354,9 +354,9 @@ async function handleImageUpload(event, part) {
     const file = event.target.files[0];
     if (!file) return;
 
-    // Validate file size (2MB max)
-    if (file.size > 2 * 1024 * 1024) {
-        window.showToast('Ukuran file maksimal 2MB', 'error');
+    // Validate file size (3MB max)
+    if (file.size > 3 * 1024 * 1024) {
+        window.showModal('Maaf, ukuran foto terlalu besar (maks 3MB). Silakan kompres foto kamu di <a href="https://www.iloveimg.com/id/kompres-gambar" target="_blank" style="color: #10b981; text-decoration: underline; font-weight: 700;">iloveimg.com</a> lalu coba lagi.', 'Ukuran Tumbuhan Terlalu Besar', '🌿');
         event.target.value = '';
         return;
     }

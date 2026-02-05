@@ -20,7 +20,8 @@ class Toast {
         return container;
     }
 
-    show(message, type = 'info', title = '', duration = 3000) {
+    show(message, type = 'info', title = '', duration = 4000) {
+        console.log(`[Toast] Showing ${type} toast: ${message}`);
         const toast = this.createToast(message, type, title);
         this.container.appendChild(toast);
 
@@ -89,6 +90,9 @@ class Toast {
         return this.show(message, 'info', title);
     }
 }
+
+// Ensure the class is available globally before instantiation
+window.Toast = Toast;
 
 // Global toast instance
 const toast = new Toast();
@@ -195,6 +199,61 @@ class Lightbox {
 
 // Global lightbox instance
 const lightbox = new Lightbox();
+
+// ==================== Modal Pop-up ====================
+
+class Modal {
+    constructor() {
+        this.overlay = this.createOverlay();
+    }
+
+    createOverlay() {
+        let overlay = document.querySelector('.modal-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            overlay.innerHTML = `
+                <div class="modal-container">
+                    <div class="modal-icon" id="modalIcon">⚠️</div>
+                    <div class="modal-title" id="modalTitle">Peringatan</div>
+                    <div class="modal-body" id="modalBody"></div>
+                    <div class="modal-footer">
+                        <button class="modal-close-btn" id="modalCloseBtn">Oke, Mengerti</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            // Close on button click
+            overlay.querySelector('#modalCloseBtn').addEventListener('click', () => this.close());
+            // Close on overlay click
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) this.close();
+            });
+        }
+        return overlay;
+    }
+
+    show(message, title = 'Peringatan', icon = '⚠️') {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalBody').innerHTML = message;
+        document.getElementById('modalIcon').textContent = icon;
+
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+const modal = new Modal();
+
+function showModal(message, title = 'Peringatan', icon = '⚠️') {
+    return modal.show(message, title, icon);
+}
 
 // ==================== Share Functionality ====================
 
@@ -354,6 +413,8 @@ function showToast(message, type = 'info', title = '') {
 // Export utilities
 window.toast = toast;
 window.showToast = showToast; // Add wrapper
+window.modal = modal;
+window.showModal = showModal;
 window.lightbox = lightbox;
 window.shareUrl = shareUrl;
 window.sharePlant = sharePlant;

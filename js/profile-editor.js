@@ -1,6 +1,29 @@
 // Profile Editor Logic
 // Handle profile editing, avatar upload, Instagram URL
 
+// Fallback for showToast to prevent crashes if utilities.js fails to load
+if (typeof window.showToast !== 'function') {
+    window.showToast = function (message, type = 'info', title = '') {
+        console.warn('Using fallback showToast:', message);
+        const container = document.querySelector('.toast-container') || (() => {
+            const c = document.createElement('div');
+            c.className = 'toast-container';
+            document.body.appendChild(c);
+            return c;
+        })();
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <div style="background: #333; color: #fff; padding: 16px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid ${type === 'error' ? '#ef4444' : '#10b981'}">
+                <strong>${title || (type === 'error' ? 'Error' : 'Info')}</strong><br>
+                ${message}
+            </div>
+        `;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 5000);
+    };
+}
+
 // DOM Elements
 const profileForm = document.getElementById('profileForm');
 const fullNameInput = document.getElementById('fullName');
@@ -172,7 +195,7 @@ avatarFileInput.addEventListener('change', async (e) => {
 
     // Validate file size (1MB max)
     if (file.size > 1 * 1024 * 1024) {
-        window.showToast('Ukuran file maksimal 1MB', 'error');
+        window.showModal('Maaf, ukuran foto terlalu besar (maks 1MB). Silakan kompres foto kamu di <a href="https://www.iloveimg.com/id/kompres-gambar" target="_blank" style="color: #10b981; text-decoration: underline; font-weight: 700;">iloveimg.com</a> lalu coba lagi.', 'Ukuran Foto Terlalu Besar', '🖼️');
         e.target.value = '';
         return;
     }
