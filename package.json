@@ -1,0 +1,25 @@
+{
+  "name": "scifanor_twoo",
+  "version": "1.0.0",
+  "description": "SciFanor adalah portal pembelajaran sains interaktif yang dirancang khusus untuk siswa program IPS. Project ini bertujuan untuk mematahkan stigma bahwa sains itu membosankan atau terlalu sulit bagi siswa IPS, dengan menghadirkan konten yang relevan, visual, dan mudah dipahami.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayanou84/Scifanor_twoo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ayanou84/Scifanor_twoo/issues"
+  },
+  "homepage": "https://github.com/ayanou84/Scifanor_twoo#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.94.1",
+    "dotenv": "^17.2.3"
+  }
+}

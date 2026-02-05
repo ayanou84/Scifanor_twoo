@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dashboard-enhanced.css">
+    <link rel="stylesheet" href="css/collaborators.css">
 </head>
 
 <body>
@@ -58,6 +59,7 @@
                     <h1>Dashboard Admin</h1>
                     <div class="header-actions">
                         <span id="userEmail" class="user-email"></span>
+                        <a href="profile-editor.html" class="btn btn-secondary">✏️ Edit Profil</a>
                         <button onclick="logout()" class="btn btn-secondary">Logout</button>
                     </div>
                 </div>
@@ -69,6 +71,7 @@
             <div class="container-wide">
                 <a href="index.html" class="nav-link">🏠 Homepage</a>
                 <a href="biology.html" class="nav-link">🌱 Lihat Biology Section</a>
+                <a href="qr-generator.html" class="nav-link">🎯 QR Generator</a>
             </div>
         </nav>
 
@@ -362,6 +365,7 @@
     <script src="js/supabase-client.js"></script>
     <script src="js/utilities.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/collaborator-manager.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 

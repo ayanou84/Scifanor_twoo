@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/biology.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/plant-detail.css">
+    <link rel="stylesheet" href="css/collaborators.css">
     <style>
         /* Navigation */
         .nav {
@@ -258,6 +259,20 @@
             </div>
         </section>
 
+        <!-- Collaborators Section -->
+        <section id="collaboratorsSection" class="collaborators-section" style="display: none;">
+            <div class="container">
+                <h3>👥 Kolaborator</h3>
+                <div id="creatorInfo"></div>
+                <div id="collaboratorsGrid" class="collaborators-grid"></div>
+                <button class="btn-manage-collaborators" onclick="showAddCollaboratorModal(plantId)"
+                    style="margin-top: 20px;">
+                    <span>👥</span>
+                    <span>Kelola Kolaborator</span>
+                </button>
+            </div>
+        </section>
+
         <!-- YouTube Video Section (Dynamic) -->
         <section id="youtubeSection" class="youtube-section">
             <!-- YouTube embed will be rendered here by JavaScript -->
@@ -330,6 +345,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/utilities.js"></script>
+    <script src="js/collaborator-manager.js"></script>
     <script src="js/plant-anatomy.js"></script>
     <script src="js/plant-detail.js"></script>
 </body>

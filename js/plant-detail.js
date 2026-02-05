@@ -41,7 +41,7 @@ async function loadPlantDetail() {
 
         console.log(`Fetching plant with ID: ${plantId}`);
 
-        // Fetch plant from Supabase
+        // Fetch plant basic data first
         const { data: plant, error } = await window.supabaseClient
             .from('plants')
             .select('*')
@@ -58,6 +58,39 @@ async function loadPlantDetail() {
             console.error('Plant not found');
             showError();
             return;
+        }
+
+        // Load creator info
+        if (plant.created_by) {
+            const { data: creator } = await window.supabaseClient
+                .from('profiles')
+                .select('id, full_name, avatar_url, instagram_url')
+                .eq('id', plant.created_by)
+                .single();
+
+            plant.creator = creator;
+        }
+
+        // Load collaborators
+        const { data: collabData } = await window.supabaseClient
+            .from('plant_collaborators')
+            .select('user_id')
+            .eq('plant_id', plantId);
+
+        if (collabData && collabData.length > 0) {
+            const userIds = collabData.map(c => c.user_id);
+            const { data: profilesData } = await window.supabaseClient
+                .from('profiles')
+                .select('id, full_name, avatar_url, instagram_url')
+                .in('id', userIds);
+
+            // Map profiles back to collaborators
+            plant.plant_collaborators = collabData.map(collab => ({
+                user_id: collab.user_id,
+                profiles: profilesData?.find(p => p.id === collab.user_id) || null
+            }));
+        } else {
+            plant.plant_collaborators = [];
         }
 
         console.log('✅ Plant loaded:', plant);
@@ -124,6 +157,9 @@ function renderPlantDetail(plant) {
     document.getElementById('plantHabitat').textContent = plant.habitat || 'Informasi habitat belum tersedia';
     document.getElementById('plantCiri').textContent = plant.ciri_khas || 'Informasi ciri khas belum tersedia';
     document.getElementById('plantManfaat').textContent = plant.manfaat || 'Informasi manfaat belum tersedia';
+
+    // Render collaborators
+    renderCollaborators(plant);
 
     // Show content
     showContent();
@@ -202,6 +238,70 @@ function renderYouTubeEmbed(url) {
             </div>
         </div>
     `;
+}
+
+// Render Collaborators Section
+function renderCollaborators(plant) {
+    const collaboratorsSection = document.getElementById('collaboratorsSection');
+    const creatorInfoEl = document.getElementById('creatorInfo');
+    const collaboratorsGridEl = document.getElementById('collaboratorsGrid');
+
+    const creator = plant.creator;
+    const collaborators = plant.plant_collaborators || [];
+
+    // Always show section if there's a creator or collaborators
+    if (creator || collaborators.length > 0) {
+        collaboratorsSection.style.display = 'block';
+    }
+
+    // Render creator
+    if (creator) {
+        const creatorAvatar = window.renderAvatar ? window.renderAvatar(creator, 64) : '';
+        const instagramLink = creator.instagram_url
+            ? `<a href="${creator.instagram_url}" target="_blank" onclick="event.stopPropagation();">📷 Instagram</a>`
+            : '';
+        const profileUrl = `profile.html?id=${creator.id}`;
+
+        creatorInfoEl.innerHTML = `
+            <a href="${profileUrl}" class="creator-card creator-card-link">
+                ${creatorAvatar.outerHTML || ''}
+                <div class="creator-card-info">
+                    <h4>
+                        ${creator.full_name}
+                        <span class="badge">👑 Pembuat</span>
+                    </h4>
+                    ${instagramLink}
+                </div>
+            </a>
+        `;
+    }
+
+    // Render collaborators
+    collaboratorsGridEl.innerHTML = '';
+    if (collaborators.length > 0) {
+        collaborators.forEach(collab => {
+            const profile = collab.profiles;
+            if (!profile) return;
+
+            const avatar = window.renderAvatar ? window.renderAvatar(profile, 72) : '';
+            const instagramLink = profile.instagram_url
+                ? `<a href="${profile.instagram_url}" target="_blank" onclick="event.stopPropagation();">📷 @${profile.instagram_url.split('/').pop()}</a>`
+                : '';
+            const profileUrl = `profile.html?id=${profile.id}`;
+
+            const card = document.createElement('a');
+            card.href = profileUrl;
+            card.className = 'collaborator-card collaborator-card-link';
+            card.innerHTML = `
+                ${avatar.outerHTML || ''}
+                <h4>${profile.full_name}</h4>
+                ${instagramLink}
+            `;
+            collaboratorsGridEl.appendChild(card);
+        });
+    } else if (!creator) {
+        collaboratorsGridEl.innerHTML = '<div class="empty-state-collaborators"><p>Belum ada kolaborator</p></div>';
+    }
 }
 
 // UI State Functions

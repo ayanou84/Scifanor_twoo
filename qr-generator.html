@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator | SciFanor</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/qr-generator.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="container-wide">
+            <div class="header-content">
+                <h1>🎯 QR Code Generator</h1>
+                <div class="header-actions">
+                    <a href="dashboard.html" class="btn btn-secondary">← Kembali ke Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="qr-main">
+        <div class="container">
+            <!-- Instructions -->
+            <div class="instructions-card">
+                <h2>📝 Cara Menggunakan</h2>
+                <ol>
+                    <li>Pilih tumbuhan dari dropdown</li>
+                    <li>Sesuaikan desain QR code (warna, style)</li>
+                    <li>Preview QR code dengan nama tumbuhan</li>
+                    <li>Download sebagai PNG atau PDF</li>
+                    <li>Cetak dan pasang di taman sekolah!</li>
+                </ol>
+            </div>
+
+            <div class="qr-generator-container">
+                <!-- Left: Controls -->
+                <div class="qr-controls">
+                    <h3>⚙️ Pengaturan QR Code</h3>
+
+                    <!-- Plant Selection -->
+                    <div class="form-group">
+                        <label for="plantSelect">Pilih Tumbuhan *</label>
+                        <select id="plantSelect" required>
+                            <option value="">-- Pilih Tumbuhan --</option>
+                        </select>
+                    </div>
+
+                    <!-- Design Style -->
+                    <div class="form-group">
+                        <label>Pilih Style Desain</label>
+                        <div class="style-options">
+                            <button type="button" class="style-btn active" data-style="modern">
+                                🌟 Modern
+                            </button>
+                            <button type="button" class="style-btn" data-style="minimal">
+                                ⚪ Minimal
+                            </button>
+                            <button type="button" class="style-btn" data-style="gradient">
+                                🌈 Gradient
+                            </button>
+                            <button type="button" class="style-btn" data-style="nature">
+                                🌿 Nature
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Color Scheme -->
+                    <div class="form-group">
+                        <label for="colorScheme">Skema Warna</label>
+                        <select id="colorScheme">
+                            <option value="purple">💜 Purple Dream</option>
+                            <option value="green">🌿 Nature Green</option>
+                            <option value="blue">💙 Ocean Blue</option>
+                            <option value="sunset">🌅 Sunset Orange</option>
+                            <option value="pink">🌸 Sakura Pink</option>
+                            <option value="dark">🌑 Dark Mode</option>
+                        </select>
+                    </div>
+
+                    <!-- QR Code Options -->
+                    <div class="form-group">
+                        <label>Opsi QR Code</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeLogo" checked>
+                                <span>Include SciFanor Logo</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeIcon" checked>
+                                <span>Include Plant Icon</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button id="generateBtn" class="btn btn-primary btn-large">
+                        ✨ Generate QR Code
+                    </button>
+                </div>
+
+                <!-- Right: Preview -->
+                <div class="qr-preview">
+                    <h3>👁️ Preview</h3>
+
+                    <div id="qrCodeContainer" class="qr-code-display">
+                        <div class="qr-placeholder">
+                            <p>🎨 QR Code akan muncul di sini</p>
+                            <small>Pilih tumbuhan dan klik Generate</small>
+                        </div>
+                    </div>
+
+                    <!-- Download Options (hidden until generated) -->
+                    <div id="downloadOptions" class="download-options" style="display: none;">
+                        <h4>📥 Download</h4>
+                        <div class="download-btns">
+                            <button id="downloadPng" class="btn btn-secondary">
+                                🖼️ Download PNG
+                            </button>
+                            <button id="downloadPdf" class="btn btn-secondary">
+                                📄 Download PDF
+                            </button>
+                        </div>
+                        <small>Size: 10x15cm (optimized for printing)</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Generation (Admin only) -->
+            <div id="batchGeneration" class="batch-generation" style="display: none;">
+                <h3>⚡ Batch Generation (Admin)</h3>
+                <p>Generate QR codes untuk semua tumbuhan sekaligus</p>
+                <button id="generateAllBtn" class="btn btn-primary">
+                    🚀 Generate All QR Codes (ZIP)
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/utilities.js"></script>
+
+    <!-- QR Code Library - Using unpkg CDN for better reliability -->
+    <script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
+
+    <!-- QR Generator Script - Loaded after QRCode library -->
+    <script src="js/qr-generator.js" defer></script>
+</body>
+
+</html>

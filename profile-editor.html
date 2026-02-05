@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profil | SciFanor</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/profile-editor.css">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <h1>🔐 Login Required</h1>
+            <p>Silakan login untuk mengedit profil</p>
+            <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Profile Editor (Hidden until logged in) -->
+    <div id="profileEditor" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container-wide">
+                <div class="header-content">
+                    <h1>✏️ Edit Profil</h1>
+                    <div class="header-actions">
+                        <a href="dashboard.html" class="btn btn-secondary">← Kembali ke Dashboard</a>
+                        <button onclick="logout()" class="btn btn-secondary">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="profile-main">
+            <div class="container">
+                <!-- Profile Preview -->
+                <div class="profile-preview">
+                    <div class="avatar-display" id="avatarDisplay">
+                        <!-- Avatar akan di-generate oleh JS -->
+                    </div>
+                    <h2 id="previewName">Nama Kamu</h2>
+                    <p id="previewEmail">email@scifanor.local</p>
+                </div>
+
+                <!-- Edit Form -->
+                <div class="profile-form-container">
+                    <form id="profileForm" class="profile-form">
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label for="fullName">Nama Lengkap *</label>
+                            <input type="text" id="fullName" required placeholder="Nama lengkap kamu">
+                        </div>
+
+                        <!-- Avatar Upload -->
+                        <div class="form-group">
+                            <label>Foto Profil</label>
+                            <div class="avatar-upload-container">
+                                <input type="file" id="avatarFile" accept="image/*" class="file-input-hidden">
+                                <label for="avatarFile" class="avatar-upload-btn">
+                                    📷 Upload Foto Profil
+                                </label>
+                                <small>Format: JPG, PNG, WebP (Max 1MB)</small>
+                                <button type="button" id="removeAvatarBtn" class="btn-text-danger" style="display: none;">
+                                    Hapus Foto
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Instagram URL -->
+                        <div class="form-group">
+                            <label for="instagramUrl">Instagram</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">instagram.com/</span>
+                                <input type="text" id="instagramUsername" placeholder="username_kamu">
+                            </div>
+                            <small>Masukkan username Instagram kamu tanpa @ atau https://</small>
+                        </div>
+
+                        <!-- Bio -->
+                        <div class="form-group">
+                            <label for="bio">Bio (Opsional)</label>
+                            <textarea id="bio" rows="3" placeholder="Ceritakan sedikit tentang diri kamu..."></textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <span id="submitBtnText">💾 Simpan Perubahan</span>
+                            </button>
+                            <a href="dashboard.html" class="btn btn-secondary">Batal</a>
+                        </div>
+
+                        <div id="formError" class="error-message" style="display: none;"></div>
+                        <div id="formSuccess" class="success-message" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <!-- Admin Badge (if admin) -->
+                <div id="adminBadge" class="admin-info" style="display: none;">
+                    <div class="badge-container">
+                        <span class="admin-badge">👑 Admin</span>
+                        <p>Kamu memiliki akses admin penuh ke seluruh sistem</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/utilities.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile-editor.js"></script>
+</body>
+
+</html>

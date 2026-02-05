@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil User | SciFanor</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/biology.css">
+    <link rel="stylesheet" href="css/collaborators.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">← SciFanor</a>
+                <a href="biology.html" class="nav-link">🌱 Lihat Tumbuhan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Memuat profil...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error" class="error-container" style="display: none;">
+        <p>❌ Profil tidak ditemukan</p>
+        <a href="biology.html" class="btn btn-primary">Kembali ke Biology</a>
+    </div>
+
+    <!-- Profile Content -->
+    <div id="profileContent" style="display: none;">
+        <!-- Profile Header -->
+        <section class="profile-header">
+            <div class="container">
+                <div class="profile-header-content">
+                    <div id="profileAvatar" class="profile-avatar-large"></div>
+                    <div class="profile-info">
+                        <h1 id="profileName" class="profile-name"></h1>
+                        <p id="profileRole" class="profile-role"></p>
+                        <div id="profileSocial" class="profile-social"></div>
+                    </div>
+                    <div id="profileStats" class="profile-stats"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contributions Section -->
+        <section class="profile-contributions">
+            <div class="container">
+                <!-- Created Plants -->
+                <div class="contribution-section">
+                    <h2>🌿 Tumbuhan yang Dibuat <span id="createdCount" class="count-badge">0</span></h2>
+                    <div id="createdPlants" class="plants-grid"></div>
+                    <div id="createdEmpty" class="empty-state-small" style="display: none;">
+                        <p>Belum membuat tumbuhan</p>
+                    </div>
+                </div>
+
+                <!-- Collaborated Plants -->
+                <div class="contribution-section">
+                    <h2>👥 Kolaborasi <span id="collabCount" class="count-badge">0</span></h2>
+                    <div id="collabPlants" class="plants-grid"></div>
+                    <div id="collabEmpty" class="empty-state-small" style="display: none;">
+                        <p>Belum berkolaborasi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            Dibuat dengan <span style="color: #10b981;">💚</span> oleh <span class="footer-gradient-text">12 IPS
+                2</span>
+        </p>
+        <p style="font-size: 0.9rem; margin-top: var(--spacing-xs);">
+            SMA Brigjend Katamso 2 Medan • 2026
+        </p>
+    </footer>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/utilities.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

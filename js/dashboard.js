@@ -110,6 +110,7 @@ function renderPlantsList(plants) {
       </div>
       <div class="plant-item-actions">
         <button onclick="editPlant('${plant.id}')" class="btn-icon btn-edit">Edit</button>
+        <button onclick="showAddCollaboratorModal('${plant.id}')" class="btn-icon btn-collab" title="Kelola Kolaborator">👥</button>
         <button onclick="deletePlant('${plant.id}')" class="btn-icon btn-delete">Hapus</button>
       </div>
     `;

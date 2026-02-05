@@ -27,13 +27,29 @@ function showLoginScreen() {
 
 // Show dashboard
 function showDashboard(user) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('userEmail').textContent = user.email;
+    const dashboardEl = document.getElementById('dashboard');
+    const profileEditorEl = document.getElementById('profileEditor');
+    const loginScreenEl = document.getElementById('loginScreen');
 
-    // Load plants if dashboard is ready
-    if (typeof loadDashboardPlants === 'function') {
-        loadDashboardPlants();
+    loginScreenEl.style.display = 'none';
+
+    if (dashboardEl) {
+        dashboardEl.style.display = 'block';
+        document.getElementById('userEmail').textContent = user.email;
+
+        // Load plants if dashboard is ready
+        if (typeof loadDashboardPlants === 'function') {
+            loadDashboardPlants();
+        }
+    }
+
+    if (profileEditorEl) {
+        profileEditorEl.style.display = 'block';
+
+        // Load profile editor if function exists
+        if (typeof loadProfileEditor === 'function') {
+            loadProfileEditor();
+        }
     }
 }
 
